@@ -1,0 +1,14 @@
+{
+  "admin": {  
+    "login": {
+      "github": "Github",
+      "google": "Google",
+      "apple": "Apple",
+      "choice": "Choisissez un moyen de connection",
+      "connection" : "Se connecter",
+      "division": "ou connectez-vous avec",
+      "pass" : "Mot de passe"
+    },
+    "signout": "Déconnexion"
+  }
+}

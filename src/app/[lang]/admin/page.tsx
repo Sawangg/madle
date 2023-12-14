@@ -1,0 +1,19 @@
+import { redirect } from "next/navigation";
+import { isAdmin } from "@actions/isAdmin";
+import { auth } from "@lib/auth";
+import { getDictionnary, type Locale } from "@lib/getDictionnary";
+
+export default async function AdminHomePage({ params }: { params: { lang: string } }) {
+  const session = await auth();
+  const admin = await isAdmin(session!.user!.email!);
+  if (!admin) return redirect("/");
+
+  const dictionnary = await getDictionnary(params.lang as Locale);
+  console.log(dictionnary);
+
+  return (
+    <main className="p-4">
+      <p>Admin page</p>
+    </main>
+  );
+}
