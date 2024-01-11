@@ -11,8 +11,8 @@ import { AspectRatio } from "@ui/primitives/AspectRatio";
 import { Strong, Text } from "@ui/Text";
 
 export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionnary = await getDictionnary(params.lang as Locale);
-  console.log(dictionnary);
+  const dictionary = await getDictionnary(params.lang as Locale);
+  console.log(dictionary);
 
   return (
     <body className="min-h-screen min-w-screen overflow-x-hidden">
