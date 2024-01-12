@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
 
   return (
     <main className={"px-20 py-16 text-blue-900"}>
-      <h1 className={"py-7 text-4xl font-semibold italic "}>Student</h1>
+      <h1 className={"py-7 text-4xl font-semibold italic"}>Student</h1>
       <section>
         <h2 className={"py-4 text-2xl underline"}>My Internships</h2>
         <CustomTable columns={column} data={data} />
