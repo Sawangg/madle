@@ -1,4 +1,3 @@
-import { Checkbox } from "@src/ui/Checkbox";
 import { TextArea } from "@src/ui/TextArea";
 import { Button } from "@ui/Button";
 
