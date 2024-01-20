@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
       Date: "2022-01-01",
       Company: "DBA inc",
       Contact: "John Doe",
-      Internship: "Architecte",
+      Internship: "Architect",
       Document: "Resume",
       Content: "...",
       Status: "check",
@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
       </section>
       <section>
         <h2 className={"py-4 text-2xl underline"}>Preview</h2>
-        <StudentPreview />
+        <StudentPreview studentName={"John Doe"} studentYear={"M2 APP LSI"} />
       </section>
     </main>
   );
