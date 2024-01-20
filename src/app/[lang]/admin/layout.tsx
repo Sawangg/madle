@@ -1,3 +1,4 @@
+import type React from "react";
 import type { Metadata } from "next";
 import { auth, signOut } from "@lib/auth";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
