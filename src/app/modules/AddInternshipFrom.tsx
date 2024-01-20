@@ -1,8 +1,10 @@
+"use client";
+
 import { Button } from "@ui/Button";
 
 export default function AddInternshipFrom() {
   return (
-    <form>
+    <form className={"rounded border bg-gray-50 p-4"}>
       {/* Company Section */}
       <div className={"mb-5 rounded border p-5"}>
         <h2 className={"text-2xl font-semibold italic"}>Company</h2>
