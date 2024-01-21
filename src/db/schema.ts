@@ -5,7 +5,7 @@ export const users = pgTable("user", {
   id: uuid("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
-  emailVerified: timestamp("emailVerified", { mode: "date" }),
+  emailVerified: timestamp("email_verified", { mode: "date" }),
   image: text("image"),
   password: text("password"),
   admin: boolean("admin").default(false).notNull(),
@@ -19,7 +19,7 @@ export const accounts = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<"oauth" | "oidc" | "email">().notNull(),
     provider: text("provider").notNull(),
-    providerAccountId: text("providerAccountId").notNull(),
+    providerAccountId: text("provider_account_id").notNull(),
     refresh_token: text("refresh_token"),
     access_token: text("access_token"),
     expires_at: integer("expires_at"),
@@ -34,7 +34,7 @@ export const accounts = pgTable(
 );
 
 export const verificationTokens = pgTable(
-  "verificationToken",
+  "verification_token",
   {
     identifier: text("identifier").notNull(),
     token: text("token").notNull(),
@@ -44,3 +44,24 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const internships = pgTable("internships", {
+  id: uuid("id").notNull().primaryKey(),
+  title: text("title").notNull(),
+  dateStart: timestamp("date_start", { mode: "date" }).notNull(),
+  dateEnd: timestamp("date_end", { mode: "date" }).notNull(),
+  company: text("company").notNull(),
+  status: text("status").$type<"In progress" | "Pending" | "Ended">().notNull(),
+  studentId: uuid("student_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});
+
+export const documents = pgTable("documents", {
+  id: uuid("id").notNull().primaryKey(),
+  name: text("name").notNull(),
+  url: text("url").notNull(),
+  internshipId: uuid("internship_id")
+    .notNull()
+    .references(() => internships.id, { onDelete: "cascade" }),
+});

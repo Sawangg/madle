@@ -6,7 +6,7 @@ import AdminPreviewForm from "@src/app/modules/AdminPreviewForm";
 import CompletePreviewForm from "@src/app/modules/CompletePreviewForm";
 
 type CustomTableProps = {
-  columns: string[];
+  columns: Record<string, string>;
   data: Record<string, string>[];
   dictionary: Dictionary;
   previewEditable?: boolean;
@@ -40,9 +40,9 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
       <table className="w-full border-collapse border">
         <thead>
           <tr className="bg-gray-200">
-            {columns.map((column, index) => (
+            {Object.entries(columns).map(([_, value], index) => (
               <th key={index} className="border p-2">
-                {column}
+                {value}
               </th>
             ))}
             <th className="border p-2">
@@ -53,12 +53,11 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
         </thead>
         <tbody>
           {data.map((item, rowIndex) => {
-            const values = Object.values(item);
             return (
               <tr key={rowIndex} className="text-center">
-                {values.map((value, columnIndex) => (
+                {Object.keys(columns).map((columnKey, columnIndex) => (
                   <td key={columnIndex} className="border p-2">
-                    {value}
+                    {item[columnKey]}
                   </td>
                 ))}
                 <td className="border p-2">

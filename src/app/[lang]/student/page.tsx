@@ -1,36 +1,43 @@
 import type React from "react";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
+import type { Dictionary } from "@public/locales/dictionary";
 import AddInternshipForm from "@src/app/modules/AddInternshipFrom";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = await getDictionnary(params.lang as Locale);
-  console.log(dictionary);
+  const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
 
-  /*CustomTable data + column name*/
-  const column = ["Date", "Company", "Contact", "Internship", "Document"];
+  // Column key and its name in the table (based on language)
+  // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
+  const column = {
+    date: dictionary.student.column.date,
+    company: dictionary.student.column.company,
+    contact: dictionary.student.column.contact,
+    internship: dictionary.student.column.internship,
+    document: dictionary.student.column.document,
+  };
   const data = [
     {
-      Date: "2022-01-01",
-      Company: "ABC Inc",
-      Contact: "John Doe",
-      Internship: "Software Developer",
-      Document: "Resume",
+      date: "2022-01-01",
+      company: "ABC Inc",
+      contact: "John Doe",
+      internship: "Software Developer",
+      document: "Resume",
     },
     {
-      Date: "2022-02-01",
-      Company: "XYZ Ltd",
-      Contact: "Jane Smith",
-      Internship: "Marketing Intern",
-      Document: "Cover Letter",
+      date: "2022-02-01",
+      company: "XYZ Ltd",
+      contact: "Jane Smith",
+      internship: "Marketing Intern",
+      document: "Cover Letter",
     },
   ];
 
   return (
     <main className={"px-20 py-16 text-blue-900"}>
-      <h1 className={"py-7 text-4xl font-semibold italic"}>Student</h1>
+      <h1 className={"py-7 text-4xl font-semibold italic"}>{dictionary.student.title}</h1>
       <section>
-        <h2 className={"py-4 text-2xl underline"}>My Internships</h2>
+        <h2 className={"py-4 text-2xl underline"}>{dictionary.student.internshiptitle}</h2>
         <CustomTable columns={column} data={data} dictionary={dictionary} />
       </section>
       <section>

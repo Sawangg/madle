@@ -5,7 +5,7 @@ import { Button } from "@ui/Button";
 type FormProps = {
   dictionary: Dictionary;
   selectedItem: Record<string, string>;
-  columns: string[];
+  columns: Record<string, string>;
   closeForm: () => void;
   handleInputChange: (index: number, value: string) => void;
   previewEditable?: boolean;
@@ -27,9 +27,9 @@ export default function CompletePreviewForm({
           {dictionary.previewform.title}
         </h2>
         <section className={"flex flex-col justify-center"}>
-          {Object.values(selectedItem).map((value, index) => (
+          {Object.entries(selectedItem).map(([key, value], index) => (
             <div key={index} className="flex flex-col p-2">
-              <label htmlFor={`input-${index}`}>{columns[index]}</label>
+              <label htmlFor={`input-${index}`}>{columns[key]}</label>
               <input
                 type="text"
                 id={`input-${index}`}

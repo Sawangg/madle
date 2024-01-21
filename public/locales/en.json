@@ -17,11 +17,11 @@
     "managetitle": "Manage the internship",
     "notfound": "No internship found",
     "column": {
-      "date": "Date",
+      "datestart": "Start date",
+      "dateend": "End date",
       "company": "Company",
       "student": "Student",
-      "internship": "Internship",
-      "document": "Document",
+      "title": "Title",
       "status": "Status"
     },
     "form": {
@@ -30,6 +30,29 @@
       "ended": "Ended",
       "inprogress": "In progress",
       "pending": "Pending"
+    }
+  },
+  "student": {
+    "title": "Student",
+    "internshiptitle": "My internships",
+    "column": {
+      "date": "Date",
+      "company": "Company",
+      "contact": "Contact",
+      "internship": "Internship",
+      "document": "Document"
+    }
+  },
+  "tutor": {
+    "title": "Tutor",
+    "column": {
+      "date": "Date",
+      "company": "Company",
+      "contact": "Contact",
+      "internship": "Internship",
+      "document": "Document",
+      "content": "Content",
+      "status": "Status"
     }
   },
   "customtable": {
