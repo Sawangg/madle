@@ -35,8 +35,8 @@ export const DarkModeToggle: React.FC<DarkModeToggleProps> = () => {
 
   return (
     <RAButton className="size-5" onPress={() => handlePress()}>
-      <MoonIcon className="block text-zinc-400 dark:hidden" />
-      <SunIcon className="hidden text-white dark:block" />
+      <MoonIcon className="dark:hidden block text-zinc-400" />
+      <SunIcon className="dark:block hidden text-white" />
     </RAButton>
   );
 };
