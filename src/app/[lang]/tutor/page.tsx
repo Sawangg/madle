@@ -3,7 +3,7 @@ import { getDictionnary, type Locale } from "@lib/getDictionnary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 import StudentPreview from "@src/app/modules/StudentPreview";
 
-export default async function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
   const dictionary = await getDictionnary(params.lang as Locale);
   console.log(dictionary);
 
