@@ -18,5 +18,5 @@ export default function RootLayout({ children, params }: { children: React.React
         {children}
       </body>
     </html>
-);
+  );
 }

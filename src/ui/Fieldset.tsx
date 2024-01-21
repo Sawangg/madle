@@ -6,7 +6,7 @@ export type LegendProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLLegen
 export const Legend: React.FC<LegendProps> = ({ children, className, ...props }) => (
   <legend
     className={clsx(
-      "text-base/6 font-semibold text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white",
+      "dark:text-white text-base/6 font-semibold text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6",
       className,
     )}
     data-slot="legend"

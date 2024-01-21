@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function StudentLayout({ children }: { children: React.ReactNode; params: { lang: string } }) {
-  return (
-    <body>
-      {children}
-    </body>
-  );
+  return <body>{children}</body>;
 }
