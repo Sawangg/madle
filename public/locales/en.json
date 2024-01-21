@@ -31,5 +31,14 @@
       "inprogress": "In progress",
       "pending": "Pending"
     }
+  },
+  "customtable": {
+    "preview": "Preview",
+    "seemore": "See more"
+  },
+  "previewform": {
+    "title": "Information about internship",
+    "close": "Close",
+    "save": "Save"
   }
 }

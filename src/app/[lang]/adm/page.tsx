@@ -1,6 +1,6 @@
 import React from "react";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
-import type { Dictionary } from "@src/app/[lang]/adm/dictionary";
+import type { Dictionary } from "@public/locales/dictionary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {

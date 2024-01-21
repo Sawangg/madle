@@ -31,5 +31,14 @@
       "inprogress": "En cours",
       "pending": "En attente"
     }
+  },
+  "customtable": {
+    "preview": "Prévisualiser",
+    "seemore": "Voir plus"
+  },
+  "previewform": {
+    "title": "Informations du stage",
+    "close": "Fermer",
+    "save": "Sauvegarder"
   }
 }
