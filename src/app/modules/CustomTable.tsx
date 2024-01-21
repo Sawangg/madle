@@ -1,14 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@ui/Button";
+import type { Dictionary } from "@public/locales/dictionary";
+import AdminPreviewForm from "@src/app/modules/AdminPreviewForm";
+import CompletePreviewForm from "@src/app/modules/CompletePreviewForm";
 
 type CustomTableProps = {
   columns: string[];
   data: Record<string, string>[];
+  dictionary: Dictionary;
+  previewEditable?: boolean;
+  adminPage?: boolean;
 };
 
-export function CustomTable({ columns, data }: CustomTableProps) {
+export function CustomTable({ columns, data, dictionary, previewEditable, adminPage }: Readonly<CustomTableProps>) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Record<string, string> | null>(null);
 
@@ -22,9 +27,11 @@ export function CustomTable({ columns, data }: CustomTableProps) {
     setIsFormOpen(false);
   };
 
-  function handleInputChange(column: string, value: string) {
+  function handleInputChange(index: number, value: string) {
     if (selectedItem) {
-      setSelectedItem({ ...selectedItem, [column]: value });
+      const keys = Object.keys(selectedItem);
+      const newSelectedItem = { ...selectedItem, [keys[index]]: value };
+      setSelectedItem(newSelectedItem);
     }
   }
 
@@ -38,58 +45,49 @@ export function CustomTable({ columns, data }: CustomTableProps) {
                 {column}
               </th>
             ))}
-            <th className="border p-2">Preview</th>
+            <th className="border p-2">
+              {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+              {dictionary.customtable.preview}
+            </th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item, rowIndex) => (
-            <tr key={rowIndex} className="text-center">
-              {columns.map((column, colIndex) => (
-                <td key={colIndex} className="border p-2">
-                  {item[column]}
+          {data.map((item, rowIndex) => {
+            const values = Object.values(item);
+            return (
+              <tr key={rowIndex} className="text-center">
+                {values.map((value, columnIndex) => (
+                  <td key={columnIndex} className="border p-2">
+                    {value}
+                  </td>
+                ))}
+                <td className="border p-2">
+                  <button
+                    className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+                    onClick={() => openForm(item)}
+                  >
+                    {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                    {dictionary.customtable.seemore}
+                  </button>
                 </td>
-              ))}
-              <td className="border p-2">
-                <button
-                  className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-                  onClick={() => openForm(item)}
-                >
-                  See more
-                </button>
-              </td>
-            </tr>
-          ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
-      {isFormOpen && selectedItem && (
-        <div className={"mt-3 bg-gray-50"}>
-          <form className={"rounded border bg-gray-50 p-4"}>
-            <h2 className={"font-bold"}>Information about student</h2>
-            <section className={"flex flex-col justify-center"}>
-              {columns.map((column, index) => (
-                <div key={index} className="flex flex-col p-2">
-                  <label htmlFor={`input-${index}`}>{column}</label>
-                  <input
-                    type="text"
-                    id={`input-${index}`}
-                    className="border p-2"
-                    value={selectedItem[column]}
-                    onChange={(e) => handleInputChange(column, e.target.value)} // Add onChange handler if needed
-                  />
-                </div>
-              ))}
-            </section>
-            <section className={"flex justify-evenly"}>
-              <button onClick={closeForm} className={"rounded bg-blue-900 p-3 text-center text-white"}>
-                Close Form
-              </button>
-              <Button type="submit" color={"blue"}>
-                Save
-              </Button>
-            </section>
-          </form>
-        </div>
+      {isFormOpen && selectedItem && !adminPage && (
+        <CompletePreviewForm
+          dictionary={dictionary}
+          selectedItem={selectedItem}
+          columns={columns}
+          closeForm={closeForm}
+          handleInputChange={handleInputChange}
+          previewEditable={previewEditable}
+        />
+      )}
+      {isFormOpen && adminPage && selectedItem && (
+        <AdminPreviewForm dictionary={dictionary} selectedItem={selectedItem} closeForm={closeForm} />
       )}
     </div>
   );

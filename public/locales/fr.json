@@ -1,14 +1,44 @@
 {
-  "admin": {  
+  "admin": {
     "login": {
       "github": "Github",
       "google": "Google",
       "apple": "Apple",
       "choice": "Choisissez un moyen de connection",
-      "connection" : "Se connecter",
+      "connection": "Se connecter",
       "division": "ou connectez-vous avec",
-      "pass" : "Mot de passe"
+      "pass": "Mot de passe"
     },
     "signout": "Déconnexion"
+  },
+  "adm": {
+    "title": "Admin",
+    "internshiptitle": "Tous les stages",
+    "managetitle": "Gérer le stage",
+    "notfound": "Aucun stage trouvé",
+    "column": {
+      "date": "Date",
+      "company": "Entreprise",
+      "student": "Etudiant",
+      "internship": "Domaine",
+      "document": "Document",
+      "status": "Statut"
+    },
+    "form": {
+      "name": "Nom",
+      "status": "Statut du stage",
+      "ended": "Terminé",
+      "inprogress": "En cours",
+      "pending": "En attente"
+    }
+  },
+  "customtable": {
+    "preview": "Prévisualiser",
+    "seemore": "Voir plus"
+  },
+  "previewform": {
+    "title": "Informations du stage",
+    "close": "Fermer",
+    "save": "Sauvegarder"
   }
 }

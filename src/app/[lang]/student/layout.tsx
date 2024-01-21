@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   description: "Madle internship platform",
 };
 
-export default function StudentLayout({ children }: { children: React.ReactNode; params: { lang: string } }) {
+export default function StudentLayout({ children }: Readonly<{ children: React.ReactNode; params: { lang: string } }>) {
   return <body>{children}</body>;
 }
