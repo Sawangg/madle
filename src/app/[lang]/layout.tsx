@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
   return (
     <html lang={params.lang} className={`${inter.className}`}>
-      <body className="min-h-screen min-w-screen overflow-x-hidden">
+      <body className="flex min-h-screen min-w-screen flex-col overflow-x-hidden">
         <Header />
         {children}
       </body>
     </html>
-);
+  );
 }
