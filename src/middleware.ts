@@ -26,7 +26,7 @@ export default authMiddleware((request: NextAuthRequest): NextResponse => {
     } https: http:;
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
-    font-src 'self';
+    font-src 'self' https://fonts.gstatic.com;
     connect-src 'self' blob:;
     form-action 'self';
     media-src 'self';

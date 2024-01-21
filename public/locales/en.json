@@ -10,5 +10,35 @@
       "pass" : "Password"
     },
     "signout": "Sign out"
+  },
+  "adm": {
+    "title": "Admin",
+    "internshiptitle": "All internships",
+    "managetitle": "Manage the internship",
+    "notfound": "No internship found",
+    "column": {
+      "date": "Date",
+      "company": "Company",
+      "student": "Student",
+      "internship": "Internship",
+      "document": "Document",
+      "status": "Status"
+    },
+    "form": {
+      "name": "Name",
+      "status": "Status of the internship",
+      "ended": "Ended",
+      "inprogress": "In progress",
+      "pending": "Pending"
+    }
+  },
+  "customtable": {
+    "preview": "Preview",
+    "seemore": "See more"
+  },
+  "previewform": {
+    "title": "Information about internship",
+    "close": "Close",
+    "save": "Save"
   }
 }
