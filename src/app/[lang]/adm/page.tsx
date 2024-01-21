@@ -20,7 +20,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: string
     {
       Date: "2022-01-01",
       Company: "ABC Inc",
-      Contact: "John Doe",
+      Student: "John Doe",
       Internship: "Software Developer",
       Document: "Resume",
       Status: "Pending",
@@ -28,7 +28,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: string
     {
       Date: "2022-02-01",
       Company: "XYZ Ltd",
-      Contact: "Jane Smith",
+      Student: "Jane Smith",
       Internship: "Marketing Intern",
       Document: "Cover Letter",
       Status: "Ended",
@@ -40,7 +40,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: string
       <h1 className={"py-7 text-4xl font-semibold italic"}>{dictionary.adm.title}</h1>
       <section>
         <h2 className={"py-4 text-2xl underline"}>{dictionary.adm.internshiptitle}</h2>
-        <CustomTable columns={column} data={data} pageRedirectOnClick="adm" />
+        <CustomTable columns={column} data={data} dictionary={dictionary} adminPage />
       </section>
     </main>
   );
