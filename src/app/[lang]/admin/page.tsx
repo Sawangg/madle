@@ -12,8 +12,8 @@ export default async function AdminHomePage({ params }: { params: { lang: string
   console.log(dictionnary);
 
   return (
-    <main className="p-4">
+    <div className="p-4">
       <p>Admin page</p>
-    </main>
+    </div>
   );
 }

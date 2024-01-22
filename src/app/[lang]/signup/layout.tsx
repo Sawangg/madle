@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SignUpLayout({ children }: { children: React.ReactNode; params: { lang: string } }) {
-  return <body>{children}</body>;
+  return <>{children}</>;
 }

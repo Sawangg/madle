@@ -18,7 +18,7 @@ export default async function AdminLayout({
   const session = await auth();
 
   return (
-    <body className="min-h-screen min-w-screen overflow-x-hidden">
+    <main className="min-h-screen min-w-screen overflow-x-hidden">
       {children}
       <footer>
         {session && (
@@ -33,6 +33,6 @@ export default async function AdminLayout({
           </form>
         )}
       </footer>
-    </body>
+    </main>
   );
 }

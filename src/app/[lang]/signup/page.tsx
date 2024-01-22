@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
   const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
 
   return (
-    <main className={"h-screen w-full"}>
+    <main className={"flex w-full grow items-center justify-center"}>
       <div className="flex h-full items-center justify-center">
         <div className="flex w-96 flex-col gap-y-4">
           <Heading>Sign Up</Heading>
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
           </Field>
           <Field>
             <Label htmlFor="passwordConfirm">{dictionary.admin.signup.passConfirm}</Label>
-            <Input name="passwordConfirm" type="passwordConfirm" />
+            <Input name="passwordConfirm" type="password" />
           </Field>
           <form>
             <Button className="w-full" type="submit" color={"blue"}>
