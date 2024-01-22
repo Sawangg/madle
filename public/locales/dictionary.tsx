@@ -54,7 +54,8 @@ export type Dictionary = {
   tutor: {
     title: string;
     column: {
-      date: string;
+      datestart: string;
+      dateend: string;
       company: string;
       contact: string;
       internship: string;

@@ -1,7 +1,7 @@
 import { boolean, integer, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 // Auth tables
-export const users = pgTable("user", {
+export const users = pgTable("users", {
   id: uuid("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
