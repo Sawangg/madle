@@ -1,7 +1,6 @@
 import { boolean, integer, pgTable, primaryKey, text, timestamp, uuid, pgEnum } from "drizzle-orm/pg-core";
 
 // Auth tables
-
 export const userRoles = pgEnum("role", ["student", "tutor", "admin"]);
 
 export const users = pgTable("users", {
