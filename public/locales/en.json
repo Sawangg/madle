@@ -4,10 +4,17 @@
       "github": "GitHub",
       "google": "Google",
       "apple": "Apple",
-      "choice": "Choose a connection method",
+      "sentenceConnection": "Don't have an account?",
       "connection": "Sign in",
-      "division":"or sign in with",
       "pass" : "Password"
+    },
+    "signup": {
+      "passConfirm" : "Confirm Password",
+      "typeUser": "Type of user",
+      "choiceType" : "Please choose a type of user",
+      "student": "Student",
+      "tutor": "Tutor",
+      "administrator": "Administrator"
     },
     "signout": "Sign out"
   },
