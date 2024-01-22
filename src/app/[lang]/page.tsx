@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
         <Text>
           {dictionary.admin.login.sentenceConnection}
           <Link href={"/signup"}>
-            <Strong>{dictionary.admin.login.connection}</Strong>
+            <Strong className={"pl-2"}>{dictionary.admin.login.connection}</Strong>
           </Link>
         </Text>
       </div>
