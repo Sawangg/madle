@@ -4,11 +4,19 @@ export type Dictionary = {
       github: string;
       google: string;
       apple: string;
-      choice: string;
+      sentenceConnection: string;
       connection: string;
-      division: string;
       pass: string;
     };
+    signup: {
+      passConfirm : string;
+      typeUser: string;
+      choiceType: string;
+      student: string;
+      tutor: string;
+      administrator: string;
+
+    }
     signout: string;
   };
   adm: {
