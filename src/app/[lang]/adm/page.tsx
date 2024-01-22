@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllInternships } from "@db/prepared/internships";
+import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
 import type { Dictionary } from "@public/locales/dictionary";
 import { CustomTable } from "@src/app/modules/CustomTable";
@@ -15,15 +15,16 @@ export default async function Page({ params }: Readonly<{ params: { lang: string
     dateStart: dictionary.adm.column.datestart,
     dateEnd: dictionary.adm.column.dateend,
     company: dictionary.adm.column.company,
-    studentId: dictionary.adm.column.student,
+    studentName: dictionary.adm.column.student,
     title: dictionary.adm.column.title,
     status: dictionary.adm.column.status,
   };
 
-  const data = (await getAllInternships.execute()).map((internship) => ({
+  const data = (await getAllInternshipsWithStudentName.execute()).map((internship) => ({
     ...internship,
     dateStart: internship.dateStart.toISOString().split("T")[0],
     dateEnd: internship.dateEnd.toISOString().split("T")[0],
+    studentName: internship.studentName ?? "",
   }));
 
   return (
