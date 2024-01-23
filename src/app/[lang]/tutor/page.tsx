@@ -41,6 +41,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
     studentFirstName: internship.studentFirstName ?? "",
     studentLastName: internship.studentLastName ?? "",
   }));
+  // TO DO :
+  // Check if tutorPreview is complete
+
 
   return (
     <main className={"px-20 py-16 text-blue-900"}>
@@ -54,6 +57,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                   {value}
                 </th>
               ))}
+              <th className="border p-2">Review</th>
               <th className="border p-2">{dictionary.customtable.preview}</th>
             </tr>
           </thead>
@@ -68,6 +72,10 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                         : (item as Record<string, string>)[columnKey]}
                     </td>
                   ))}
+                  <td className="border p-2">
+                    {/* if complete */}
+                    <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
+                  </td>
                   <td className="border p-2">
                     <Link href={`/tutor/${item.id}`}>
                       <Button color="blue">{dictionary.customtable.seemore}</Button>
