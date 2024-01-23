@@ -15,7 +15,7 @@ const colorClasses = {
   teal: "",
   cyan: "",
   sky: "",
-  blue: "",
+  blue: "text-white [--btn-bg:theme(colors.blue.600)] [--btn-border:theme(colors.blue.700/90%)] [--btn-hover-overlay:theme(colors.white/10%)] [--btn-icon:theme(colors.blue.400)] data-[active]:[--btn-icon:theme(colors.blue.300)] data-[hovered]:[--btn-icon:theme(colors.blue.300)]",
   indigo: "",
   violet: "",
   purple: "",

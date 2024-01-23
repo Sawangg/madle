@@ -18,11 +18,11 @@ export default async function Page({ params }: { params: { lang: string } }) {
   return (
     <main className="flex w-full grow items-center justify-center">
       <div className="flex h-full items-center justify-center">
-        <div className="flex w-96 flex-col gap-y-4">
+        <form className="flex w-96 flex-col gap-y-4">
           <Heading>Sign Up</Heading>
           <FieldSet className="flex flex-col">
             <Label htmlFor="userType">{dictionary.admin.signup.typeUser}</Label>
-            <Select label="" name="userType" id="userType">
+            <Select label="userType" name="userType" id="userType">
               <Option value="student">{dictionary.admin.signup.student}</Option>
               <Option value="tutor">{dictionary.admin.signup.tutor}</Option>
               <Option value="admin">{dictionary.admin.signup.administrator}</Option>
@@ -40,12 +40,10 @@ export default async function Page({ params }: { params: { lang: string } }) {
             <Label htmlFor="passwordConfirm">{dictionary.admin.signup.passConfirm}</Label>
             <Input name="passwordConfirm" type="password" />
           </FieldSet>
-          <form>
-            <Button className="w-full" type="submit" color="blue">
-              {dictionary.admin.login.connection}
-            </Button>
-          </form>
-        </div>
+          <Button className="w-full" type="submit" color="blue">
+            {dictionary.admin.login.signup}
+          </Button>
+        </form>
       </div>
     </main>
   );

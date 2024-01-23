@@ -6,6 +6,7 @@
       "apple": "Apple",
       "sentenceConnection": "Vous n'avez pas de compte ?",
       "connection": "Se connecter",
+      "signup": "Créer un compte",
       "pass": "Mot de passe"
     },
     "signup": {

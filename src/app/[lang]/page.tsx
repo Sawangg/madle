@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: { lang: string } }) {
     <main className="flex w-full grow items-center justify-center">
       <div className="flex w-96 flex-col gap-y-4">
         <Heading>{dictionary.admin.login.connection}</Heading>
-        <FieldSet className="flex gap-2">
+        <div className="flex gap-2">
           <form action={signInGoogle} className="w-1/2">
             <Button className="w-full" outline>
               <div className="w-4" data-slot="icon">
@@ -39,24 +39,24 @@ export default async function Page({ params }: { params: { lang: string } }) {
               Github
             </Button>
           </form>
-        </FieldSet>
-        <FieldSet>
-          <Label htmlFor="email">Email</Label>
-          <Input name="email" />
-        </FieldSet>
-        <FieldSet>
-          <Label htmlFor="password">{dictionary.admin.login.pass}</Label>
-          <Input name="password" type="password" />
-        </FieldSet>
-        <form>
-          <Button className="w-full" type="submit" color={"blue"}>
+        </div>
+        <form className="flex flex-col gap-y-4">
+          <FieldSet>
+            <Label htmlFor="email">Email</Label>
+            <Input name="email" />
+          </FieldSet>
+          <FieldSet>
+            <Label htmlFor="password">{dictionary.admin.login.pass}</Label>
+            <Input name="password" type="password" />
+          </FieldSet>
+          <Button className="w-full" type="submit" color="blue">
             {dictionary.admin.login.connection}
           </Button>
         </form>
         <Text>
           {dictionary.admin.login.sentenceConnection}
-          <Link href={"/signup"}>
-            <Strong className={"pl-2"}>{dictionary.admin.login.connection}</Strong>
+          <Link href="/signup">
+            <Strong className="pl-2">{dictionary.admin.login.signup}</Strong>
           </Link>
         </Text>
       </div>
