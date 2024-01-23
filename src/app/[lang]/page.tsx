@@ -12,8 +12,8 @@ import { Label } from "@ui/Label";
 import { AspectRatio } from "@ui/primitives/AspectRatio";
 import { Strong, Text } from "@ui/Text";
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionary = await getDictionary(params.lang as Locale);
+export default async function Page({ params }: { params: { lang: Locale } }) {
+  const dictionary = await getDictionary(params.lang);
 
   return (
     <main className="flex w-full grow items-center justify-center">

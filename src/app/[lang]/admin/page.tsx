@@ -3,12 +3,12 @@ import { isAdmin } from "@actions/isAdmin";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 
-export default async function AdminHomePage({ params }: { params: { lang: string } }) {
+export default async function AdminHomePage({ params }: { params: { lang: Locale } }) {
   const session = await auth();
   const admin = await isAdmin(session!.user!.email!);
   if (!admin) return redirect("/");
 
-  const dictionnary = await getDictionary(params.lang as Locale);
+  const dictionnary = await getDictionary(params.lang);
   console.log(dictionnary);
 
   return (

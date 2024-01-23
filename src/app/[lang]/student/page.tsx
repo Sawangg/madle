@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: "Madle internship platform",
 };
 
-export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = await getDictionary(params.lang as Locale);
+export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
+  const dictionary = await getDictionary(params.lang);
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
