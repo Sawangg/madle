@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Link } from "react-aria-components";
 import { isTutor } from "@actions/isTutor";
 import { getInternshipTutorTable } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import { CustomTable } from "@src/app/modules/CustomTable";
-import PreviewTutor from "@src/app/modules/PreviewTutor";
+import { Button } from "@ui/Button";
 
 export const metadata: Metadata = {
   title: "Madle - Tutor part",
@@ -45,12 +45,40 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   return (
     <main className={"px-20 py-16 text-blue-900"}>
       <h1 className={"py-7 text-4xl font-semibold italic"}>{dictionary.tutor.title}</h1>
-      <section>
-        <CustomTable columns={column} data={data} dictionary={dictionary} />
-      </section>
-      <section>
-        <PreviewTutor data={data} />
-      </section>
+      <div className="max-w-full overflow-x-auto">
+        <table className="w-full border-collapse border">
+          <thead>
+            <tr className="bg-gray-200">
+              {Object.entries(column).map(([_, value], index) => (
+                <th key={index} className="border p-2">
+                  {value}
+                </th>
+              ))}
+              <th className="border p-2">{dictionary.customtable.preview}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, rowIndex) => {
+              return (
+                <tr key={rowIndex} className="text-center">
+                  {Object.keys(column).map((columnKey, columnIndex) => (
+                    <td key={columnIndex} className="border p-2">
+                      {columnKey == "status"
+                        ? (dictionary.adm.form as Record<string, string>)[item[columnKey]]
+                        : (item as Record<string, string>)[columnKey]}
+                    </td>
+                  ))}
+                  <td className="border p-2">
+                    <Link href={`/tutor/${item.id}`}>
+                      <Button color="blue">{dictionary.customtable.seemore}</Button>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }

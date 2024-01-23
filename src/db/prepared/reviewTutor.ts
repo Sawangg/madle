@@ -1,7 +1,15 @@
+import { redirect } from "next/navigation";
 import { and, eq, sql } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
+import { z } from "zod";
 import { tutorReviews } from "@db/schema";
 import { db } from "@src/db";
+
+const UpdateSchema = z.object({
+  internshipId: z.string().uuid(),
+  observation: z.string(),
+  punctuality: z.boolean(),
+});
 
 export const getTutorReviewsByInternshipId = db
   .select()
@@ -9,16 +17,20 @@ export const getTutorReviewsByInternshipId = db
   .where(and(eq(tutorReviews.internshipId, sql.placeholder("internshipId"))))
   .prepare("getTutorReviewsByInternship");
 
-export const insertTutorReview = (internshipId: string, observation: string, punctuality: boolean) => {
+export const insertTutorReview = async (data: { internshipId: string; observation: string; punctuality: boolean }) => {
+  const result = UpdateSchema.safeParse(data);
+  if (!result.success) return { message: result.error };
+
   const id: string = uuidv4();
-  return db
+  await db
     .insert(tutorReviews)
     .values({
       id: id,
-      internshipId: internshipId,
-      observation: observation,
-      punctuality: punctuality,
+      internshipId: data.internshipId,
+      observation: data.observation,
+      punctuality: data.punctuality,
     })
-    .returning()
-    .prepare("insertTutorReview");
+    .prepare("insertTutorReview")
+    .execute();
+  return redirect("/tutor");
 };
