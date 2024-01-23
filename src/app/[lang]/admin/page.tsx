@@ -1,19 +1,56 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@actions/isAdmin";
+import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
+import { CustomTable } from "@src/app/modules/CustomTable";
 
-export default async function AdminHomePage({ params }: Readonly<{ params: { lang: Locale } }>) {
+export const metadata: Metadata = {
+  title: "Madle - Admin part",
+  description: "Madle administration platform",
+};
+
+export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
+  // Admin check
   const session = await auth();
   const admin = await isAdmin(session!.user!.email!);
   if (!admin) return redirect("/");
 
-  const dictionnary = await getDictionary(params.lang);
-  console.log(dictionnary);
+  const dictionary = await getDictionary(params.lang);
+
+  /* CustomTable data + column name based on language */
+
+  // Column key and its name in the table (based on language)
+  // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
+  const column: Record<string, string> = {
+    dateStart: dictionary.adm.column.datestart,
+    dateEnd: dictionary.adm.column.dateend,
+    company: dictionary.adm.column.company,
+    studentName: dictionary.adm.column.student,
+    title: dictionary.adm.column.title,
+    status: dictionary.adm.column.status,
+  };
+
+  const data = (await getAllInternshipsWithStudentName.execute()).map((internship) => ({
+    ...internship,
+    dateStart: internship.dateStart.toISOString().split("T")[0],
+    dateEnd: internship.dateEnd.toISOString().split("T")[0],
+    studentName:
+      internship.studentFirstName && internship.studentLastName
+        ? `${internship.studentFirstName} ${internship.studentLastName}`
+        : "",
+    studentFirstName: internship.studentFirstName ?? "",
+    studentLastName: internship.studentLastName ?? "",
+  }));
 
   return (
-    <div className="p-4">
-      <p>Admin page</p>
-    </div>
+    <main className="px-20 py-16 text-blue-900">
+      <h1 className="py-7 text-4xl font-semibold italic">{dictionary.adm.title}</h1>
+      <section>
+        <h2 className="py-4 text-2xl underline">{dictionary.adm.internshiptitle}</h2>
+        <CustomTable columns={column} data={data} dictionary={dictionary} adminPage />
+      </section>
+    </main>
   );
 }
