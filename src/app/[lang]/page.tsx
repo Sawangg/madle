@@ -19,12 +19,14 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   const dictionary = await getDictionary(params.lang);
 
   const session = await auth();
-  const user = await preparedUserEmail.execute({ email: session?.user?.email });
-  if (user.length > 0) {
-    if (user[0].role === "admin") redirect("/admin");
-    if (user[0].role === "student") redirect("/student");
-    if (user[0].role === "tutor") redirect("/tutor");
-    else redirect("/");
+  if (session?.user?.email !== undefined) {
+    const user = await preparedUserEmail.execute({ email: session?.user?.email });
+    if (user.length > 0) {
+      if (user[0].role === "admin") redirect("/admin");
+      if (user[0].role === "student") redirect("/student");
+      if (user[0].role === "tutor") redirect("/tutor");
+      else redirect("/");
+    }
   }
 
   return (
