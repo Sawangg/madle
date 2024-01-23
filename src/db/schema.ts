@@ -1,12 +1,12 @@
-import { integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 // Auth tables
 export const userRoles = pgEnum("role", ["student", "tutor", "admin"]);
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey().notNull(),
   username: text("username"),
-  first_name: text("first_name"),
-  last_name: text("last_name"),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
   email: text("email").notNull(),
   emailVerified: timestamp("email_verified", { mode: "date" }),
   image: text("image"),

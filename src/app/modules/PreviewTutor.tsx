@@ -38,12 +38,13 @@ export default function PreviewTutor({ data }: Readonly<PreviewTutorProps>) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Form submitted!");
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
     data.internshipId = studentData.studentId;
-    data.punctuality = data.punctuality === "true";
-    console.log(data);
+    const apiData = {
+      ...data,
+      punctuality: data.punctuality === "true",
+    };
 
     // Send data to API
     const response = await fetch("/api/tutor_review/", {
@@ -51,12 +52,10 @@ export default function PreviewTutor({ data }: Readonly<PreviewTutorProps>) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(apiData),
     });
     if (!response.ok) {
       console.error("Error during the request");
-    } else {
-      console.log("Dat successfully sent");
     }
   };
 

@@ -1,6 +1,6 @@
 import { eq, sql } from "drizzle-orm";
-import { db } from "@db/index";
 import { users } from "@db/schema";
+import { db } from "@src/db";
 
 export const preparedUserEmail = db
   .select()

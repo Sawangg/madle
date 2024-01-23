@@ -19,7 +19,6 @@ const SignupSchema = z
   });
 
 export const signup = async (formData: FormData) => {
-  console.log("Received form data", formData);
   const result = SignupSchema.safeParse(Object.fromEntries(formData.entries()));
   if (!result.success) {
     console.log("Error parsing form data", result.error);

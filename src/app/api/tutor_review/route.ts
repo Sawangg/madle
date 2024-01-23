@@ -1,8 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
-import { tutorReviews } from "@db/schema";
-import { db } from "@src/db";
+import { insertTutorReview } from "@db/prepared/reviewTutor";
 
 const tutorReviewSchema = z.object({
   internshipId: z.string(),
@@ -12,19 +10,11 @@ const tutorReviewSchema = z.object({
 
 export async function POST(request: NextRequest) {
   const data = tutorReviewSchema.safeParse(await request.json());
-  console.log(data);
   if (!data.success) return NextResponse.json(data.error, { status: 400 });
-  // generate uuid
-  console.log(data.data);
-  const id: string = uuidv4();
-  await db
-    .insert(tutorReviews)
-    .values({
-      id: id,
-      internshipId: data.data.internshipId,
-      observation: data.data.observation,
-      punctuality: data.data.punctuality,
-    })
-    .returning();
-  return NextResponse.json({ message: "Données enregistrées avec succès" });
+  try {
+    await insertTutorReview(data.data.internshipId, data.data.observation, data.data.punctuality).execute();
+  } catch (error) {
+    return NextResponse.json({ message: "Tutor review could not be inserted" }, { status: 500 });
+  }
+  return NextResponse.json({ message: "Data saved successfully" }, { status: 200 });
 }

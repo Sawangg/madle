@@ -54,7 +54,7 @@ export default function CompletePreviewForm({ dictionary, selectedItem, closeFor
         <section className="flex flex-col justify-center">
           <div className="flex flex-col p-2">
             <label htmlFor="status">{dictionary.adm.form.name}</label>
-            <input type="text" id="name" className="border p-2" value={selectedItem.student} disabled />
+            <input type="text" id="name" className="border p-2" value={selectedItem.studentName} disabled />
           </div>
           <div className="flex flex-col p-2">
             <label htmlFor="status">{dictionary.adm.form.status}</label>
