@@ -10,7 +10,8 @@ export const getAllInternshipsWithStudentName = db
     dateEnd: internships.dateEnd,
     company: internships.company,
     status: internships.status,
-    studentName: users.name,
+    studentFirstName: users.first_name,
+    studentLastName: users.last_name,
   })
   .from(internships)
   .innerJoin(users, eq(internships.studentId, users.id))
@@ -28,7 +29,8 @@ export const getInternshipTutorTable = db
     company: internships.company,
     status: internships.status,
     studentId: internships.studentId,
-    studentName: users.name,
+    studentFirstName: users.first_name,
+    studentLastName: users.last_name,
   })
   .from(internships)
   .leftJoin(users, eq(internships.studentId, users.id))

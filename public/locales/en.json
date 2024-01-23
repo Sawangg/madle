@@ -15,7 +15,9 @@
       "choiceType" : "Please choose a type of user",
       "student": "Student",
       "tutor": "Tutor",
-      "administrator": "Administrator"
+      "administrator": "Administrator",
+      "firstName": "First name",
+      "lastName": "Last name"
     },
     "signout": "Sign out"
   },

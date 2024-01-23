@@ -15,7 +15,9 @@
       "choiceType" : "Choissisez un type d'utilisateur",
       "student": "Etudiant",
       "tutor": "Tuteur",
-      "administrator": "Administrateur"
+      "administrator": "Administrateur",
+      "firstName": "Prénom",
+      "lastName": "Nom"
     },
     "signout": "Déconnexion"
   },

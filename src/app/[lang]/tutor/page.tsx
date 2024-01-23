@@ -26,7 +26,12 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
     ...internship,
     dateStart: internship.dateStart.toISOString().split("T")[0],
     dateEnd: internship.dateEnd.toISOString().split("T")[0],
-    studentName: internship.studentName ?? "",
+    studentName:
+      internship.studentFirstName && internship.studentLastName
+        ? `${internship.studentFirstName} ${internship.studentLastName}`
+        : "",
+    studentFirstName: internship.studentFirstName ?? "",
+    studentLastName: internship.studentLastName ?? "",
   }));
 
   return (
