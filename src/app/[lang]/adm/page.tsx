@@ -5,7 +5,7 @@ import type { Dictionary } from "@public/locales/dictionary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = (await getDictionnary(params?.lang as Locale)) as Dictionary;
+  const dictionary = (await getDictionnary(params?.lang as Locale)) as unknown as Dictionary;
 
   /*CustomTable data + column name based on language*/
 

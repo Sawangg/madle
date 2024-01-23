@@ -8,7 +8,7 @@ import { Input } from "@ui/Input";
 import { Label } from "@ui/Label";
 
 export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
+  const dictionary = (await getDictionnary(params.lang as Locale)) as unknown as Dictionary;
 
   return (
     <main className={"flex w-full grow items-center justify-center"}>

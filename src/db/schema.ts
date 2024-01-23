@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, primaryKey, text, timestamp, uuid, pgEnum } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 // Auth tables
 export const userRoles = pgEnum("role", ["student", "tutor", "admin"]);
@@ -77,11 +77,18 @@ export const documents = pgTable("documents", {
 });
 
 export const evaluations = pgTable("evaluations", {
-    id: uuid("id").notNull().primaryKey(),
-    submission_date: timestamp("date", { mode: "date" }).notNull(),
-    factor: text("factor").notNull(),
-    content: text("content").notNull(),
-    internshipId: uuid("internship_id")
-        .notNull()
-        .references(() => internships.id, { onDelete: "cascade" }),
+  id: uuid("id").notNull().primaryKey(),
+  submission_date: timestamp("date", { mode: "date" }).notNull(),
+  factor: text("factor").notNull(),
+  content: text("content").notNull(),
+  internshipId: uuid("internship_id")
+    .notNull()
+    .references(() => internships.id, { onDelete: "cascade" }),
+});
+
+export const tutorReviews = pgTable("tutor_reviews", {
+  id: uuid("id").notNull().primaryKey(),
+  internshipId: uuid("internship_id"),
+  punctuality: boolean("punctuality").notNull(),
+  observation: text("observation").notNull(),
 });
