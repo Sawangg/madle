@@ -2,7 +2,7 @@ import { boolean, integer, pgTable, primaryKey, text, timestamp, uuid } from "dr
 
 // Auth tables
 export const users = pgTable("user", {
-  id: uuid("id").notNull().primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("email_verified", { mode: "date" }),

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { signInGithub } from "@actions/login/signInGithub";
-import { signInGoogle } from "@actions/login/signInGoogle";
+import { signInGithub } from "@actions/auth/login/signInGithub";
+import { signInGoogle } from "@actions/auth/login/signInGoogle";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 import { FieldSet } from "@ui/Fieldset";
