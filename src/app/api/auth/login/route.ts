@@ -19,6 +19,6 @@ export async function POST(request: NextRequest) {
     id: user.id.toString(),
     email: user.email,
     image: user.image ?? "/assets/avatar.png",
-    name: user.name ?? user.email,
+    name: user.username ?? user.email,
   });
 }

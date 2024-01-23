@@ -49,9 +49,13 @@ export default authMiddleware((request: NextAuthRequest): NextResponse => {
     return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url));
   }
 
-  // Admin routes protection
-  if (!request.auth && pathname.includes("admin") && !pathname.includes("login")) {
-    return NextResponse.redirect(new URL(`/${locale}/admin/login`, request.url));
+  // Routes protection
+  if (
+    !request.auth &&
+    (pathname.includes("admin") || pathname.includes("student") || pathname.includes("tutor")) &&
+    !pathname.includes("login")
+  ) {
+    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
   }
 
   return NextResponse.next({

@@ -1,11 +1,23 @@
-import type React from "react";
-import { getDictionnary, type Locale } from "@lib/getDictionnary";
-import type { Dictionary } from "@public/locales/dictionary";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { isStudent } from "@actions/isStudent";
+import { auth } from "@lib/auth";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import AddInternshipForm from "@src/app/modules/AddInternshipFrom";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
-export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
+export const metadata: Metadata = {
+  title: "Madle - Student part",
+  description: "Madle internship platform",
+};
+
+export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
+  // Student check
+  const session = await auth();
+  const student = await isStudent(session!.user!.email!);
+  if (!student) return redirect("/");
+
+  const dictionary = await getDictionary(params.lang);
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)

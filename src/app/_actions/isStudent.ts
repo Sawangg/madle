@@ -2,8 +2,8 @@
 
 import { preparedUserEmail } from "@db/prepared/userEmail";
 
-export const isAdmin = async (email: string) => {
+export const isStudent = async (email: string) => {
   const user = await preparedUserEmail.execute({ email });
   if (!user[0]) return false;
-  return user[0].role === "admin";
+  return user[0].role === "student";
 };

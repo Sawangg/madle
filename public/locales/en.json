@@ -6,6 +6,7 @@
       "apple": "Apple",
       "sentenceConnection": "Don't have an account?",
       "connection": "Sign in",
+      "signup": "Sign up",
       "pass" : "Password"
     },
     "signup": {
@@ -14,7 +15,9 @@
       "choiceType" : "Please choose a type of user",
       "student": "Student",
       "tutor": "Tutor",
-      "administrator": "Administrator"
+      "administrator": "Administrator",
+      "firstName": "First name",
+      "lastName": "Last name"
     },
     "signout": "Sign out"
   },

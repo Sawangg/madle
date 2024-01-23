@@ -1,28 +1,36 @@
-"use client";
-
-import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Avatar } from "@ui/Avatar";
+import { auth, signOut } from "@lib/auth";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
+import { Button } from "@src/ui/Button";
 
-const Header: React.FC = () => {
-  const [isHomePage, setIsHomePage] = React.useState(false);
+export type HeaderProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+  lang: Locale;
+};
 
-  useEffect(() => {
-    setIsHomePage(window.location.pathname === "/");
-  }, []);
+export const Header: React.FC<HeaderProps> = async ({ lang }) => {
+  const dictionary = await getDictionary(lang);
+  const session = await auth();
 
   return (
-    <header className={"grid grid-cols-3 items-center gap-4 bg-blue-900 p-2 px-10 text-center"}>
-      <Link href={"/"}>
-        <Image src={"/assets/MadleLogo.svg"} alt={"MadleLogo"} width={"100"} height={"100"} />
+    <header className="grid grid-cols-3 items-center gap-4 bg-blue-900 p-2 px-10 text-center shadow-xl">
+      <Link href="/">
+        <Image src="/assets/MadleLogo.svg" alt="MadleLogo" width="100" height="100" />
       </Link>
-      <h1 className={"text-3xl font-semibold uppercase italic text-white"}>Madle</h1>
-      <div className={"text-end"}>
-        {isHomePage ? <Avatar src="/assets/avatar.png" alt="avatar" className="w-14" /> : null}
-      </div>
+      <h1 className="text-3xl font-semibold uppercase italic text-white">Madle</h1>
+      {session && (
+        <form
+          action={async () => {
+            "use server";
+            await signOut({ redirectTo: "/" });
+          }}
+          className="text-end"
+        >
+          <Button color="red" type="submit">
+            {dictionary.admin.signout}
+          </Button>
+        </form>
+      )}
     </header>
   );
 };
-
-export default Header;

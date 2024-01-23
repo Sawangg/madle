@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import type { Dictionary } from "@public/locales/dictionary";
+import { useState } from "react";
+import type { Dictionary } from "@lib/getDictionnary";
 import AdminPreviewForm from "@src/app/modules/AdminPreviewForm";
 import CompletePreviewForm from "@src/app/modules/CompletePreviewForm";
+import { Button } from "@ui/Button";
 
 type CustomTableProps = {
   columns: Record<string, string>;
@@ -45,10 +46,7 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
                 {value}
               </th>
             ))}
-            <th className="border p-2">
-              {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-              {dictionary.customtable.preview}
-            </th>
+            <th className="border p-2">{dictionary.customtable.preview}</th>
           </tr>
         </thead>
         <tbody>
@@ -61,13 +59,9 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
                   </td>
                 ))}
                 <td className="border p-2">
-                  <button
-                    className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-                    onClick={() => openForm(item)}
-                  >
-                    {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+                  <Button color="blue" onPress={() => openForm(item)}>
                     {dictionary.customtable.seemore}
-                  </button>
+                  </Button>
                 </td>
               </tr>
             );

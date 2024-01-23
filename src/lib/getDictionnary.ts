@@ -1,14 +1,14 @@
 import "server-only";
 
-const dictionnaries = {
+const dictionaries = {
   en: () => import("@public/locales/en.json").then((module) => module.default),
   fr: () => import("@public/locales/fr.json").then((module) => module.default),
 };
 
-export type Locale = keyof typeof dictionnaries;
-export type Dictionnary = Awaited<ReturnType<typeof getDictionnary>>;
+export type Locale = keyof typeof dictionaries;
+export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
 
-export const getDictionnary = async <T extends Locale>(locale: T) => {
-  if (typeof dictionnaries[locale] === "function") return dictionnaries[locale]();
-  throw new Error(`Locale ${locale} not found`);
+export const getDictionary = async <T extends Locale>(locale: T) => {
+  if (typeof dictionaries[locale] === "function") return dictionaries[locale]();
+  return dictionaries.en();
 };

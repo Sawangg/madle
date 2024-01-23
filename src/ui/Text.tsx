@@ -11,7 +11,7 @@ export type TextProps = React.DetailedHTMLProps<
 export const Text: React.FC<TextProps> = ({ as, className, children, ...props }) => (
   <p
     className={clsx(className, `dark:text-zinc-400 text-base/6 text-zinc-500 data-[disabled]:opacity-50 sm:text-sm/6`)}
-    data-slot={as === "description" ? "description" : undefined}
+    data-slot={as === "description" ? "description" : "text"}
     {...props}
   >
     {children}
@@ -37,7 +37,7 @@ export const TextLink: React.FC<TextLinkProps> = ({ href, className, children, .
   <Link
     className={clsx(
       className,
-      "dark:text-white dark:decoration-white/50 dark:hover:decoration-white text-zinc-950 underline decoration-zinc-950/50 hover:decoration-zinc-950",
+      "dark:text-white dark:decoration-white/50 dark:hover:decoration-white text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-blue-500",
     )}
     href={href}
     {...props}
