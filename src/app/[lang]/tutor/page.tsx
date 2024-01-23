@@ -1,11 +1,10 @@
 import type React from "react";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
-import type { Dictionary } from "@public/locales/dictionary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 import StudentPreview from "@src/app/modules/StudentPreview";
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
+  const dictionary = await getDictionnary(params.lang as Locale);
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)

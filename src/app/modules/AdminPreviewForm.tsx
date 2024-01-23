@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import type { Dictionary } from "@public/locales/dictionary";
 import { Button } from "@ui/Button";
 
@@ -15,9 +15,9 @@ export default function CompletePreviewForm({ dictionary, selectedItem, closeFor
     Ended: "ended",
   } as Record<string, string>;
 
-  const [status, setStatus] = React.useState(statusMapping[selectedItem.status]);
+  const [status, setStatus] = useState(statusMapping[selectedItem.status]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setStatus(statusMapping[selectedItem.status]);
     // IMPORTANT: Do not add another dependency to this array as it will break the status change on the select
     // Next line is here to avoid the warning
@@ -48,33 +48,28 @@ export default function CompletePreviewForm({ dictionary, selectedItem, closeFor
   };
 
   return (
-    <div className={"mt-3 bg-gray-50"}>
-      <form className={"rounded border bg-gray-50 p-4"} onSubmit={updateStatus(selectedItem.id, status)}>
-        <h2 className={"font-bold"}>
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-          {dictionary.previewform.title}
-        </h2>
-        <section className={"flex flex-col justify-center"}>
+    <div className="mt-3 bg-gray-50">
+      <form className="rounded border bg-gray-50 p-4" onSubmit={updateStatus(selectedItem.id, status)}>
+        <h2 className="font-bold">{dictionary.previewform.title}</h2>
+        <section className="flex flex-col justify-center">
           <div className="flex flex-col p-2">
-            <label htmlFor={"status"}>{dictionary.adm.form.name}</label>
-            <input type="text" id={"name"} className="border p-2" value={selectedItem.student} disabled />
+            <label htmlFor="status">{dictionary.adm.form.name}</label>
+            <input type="text" id="name" className="border p-2" value={selectedItem.student} disabled />
           </div>
           <div className="flex flex-col p-2">
-            <label htmlFor={"status"}>{dictionary.adm.form.status}</label>
-            <select id={"status"} name="status" value={status} onChange={handleStatusChange} className={"border p-2"}>
+            <label htmlFor="status">{dictionary.adm.form.status}</label>
+            <select id="status" name="status" value={status} onChange={handleStatusChange} className="border p-2">
               <option value={statusMapping.Pending}>{dictionary.adm.form.pending}</option>
               <option value={statusMapping["In progress"]}>{dictionary.adm.form.inprogress}</option>
               <option value={statusMapping.Ended}>{dictionary.adm.form.ended}</option>
             </select>
           </div>
         </section>
-        <section className={"flex justify-evenly"}>
-          <button onClick={closeForm} className={"rounded bg-blue-900 p-3 text-center text-white"}>
-            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+        <section className="flex justify-evenly">
+          <button onClick={closeForm} className="rounded bg-blue-900 p-3 text-center text-white">
             {dictionary.previewform.close}
           </button>
-          <Button type="submit" color={"blue"}>
-            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+          <Button type="submit" color="blue">
             {dictionary.previewform.save}
           </Button>
         </section>

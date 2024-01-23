@@ -1,8 +1,14 @@
 import React from "react";
+import type { Metadata } from "next";
 import { getAllInternships } from "@db/prepared/internships";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
 import type { Dictionary } from "@public/locales/dictionary";
 import { CustomTable } from "@src/app/modules/CustomTable";
+
+export const metadata: Metadata = {
+  title: "Madle - Admin part",
+  description: "Madle administration platform",
+};
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
   const dictionary = (await getDictionnary(params?.lang as Locale)) as Dictionary;

@@ -1,4 +1,3 @@
-import React from "react";
 import type { Dictionary } from "@public/locales/dictionary";
 import { Button } from "@ui/Button";
 
@@ -20,13 +19,10 @@ export default function CompletePreviewForm({
   previewEditable,
 }: Readonly<FormProps>) {
   return (
-    <div className={"mt-3 bg-gray-50"}>
-      <form className={"rounded border bg-gray-50 p-4"}>
-        <h2 className={"font-bold"}>
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-          {dictionary.previewform.title}
-        </h2>
-        <section className={"flex flex-col justify-center"}>
+    <div className="mt-3 bg-gray-50">
+      <form className="rounded border bg-gray-50 p-4">
+        <h2 className="font-bold">{dictionary.previewform.title}</h2>
+        <section className="flex flex-col justify-center">
           {Object.entries(selectedItem).map(([key, value], index) => (
             <div key={index} className="flex flex-col p-2">
               <label htmlFor={`input-${index}`}>{columns[key]}</label>
@@ -41,14 +37,12 @@ export default function CompletePreviewForm({
             </div>
           ))}
         </section>
-        <section className={"flex justify-evenly"}>
-          <button onClick={closeForm} className={"rounded bg-blue-900 p-3 text-center text-white"}>
-            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+        <section className="flex justify-evenly">
+          <button onClick={closeForm} className="rounded bg-blue-900 p-3 text-center text-white">
             {dictionary.previewform.close}
           </button>
           {previewEditable && (
             <Button type="submit" color={"blue"}>
-              {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
               {dictionary.previewform.save}
             </Button>
           )}

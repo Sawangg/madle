@@ -3,9 +3,8 @@ import Link from "next/link";
 import { signInGithub } from "@actions/login/signInGithub";
 import { signInGoogle } from "@actions/login/signInGoogle";
 import { getDictionnary, type Locale } from "@lib/getDictionnary";
-import type { Dictionary } from "@public/locales/dictionary";
 import { Button } from "@ui/Button";
-import { Field } from "@ui/Fieldset";
+import { FieldSet } from "@ui/Fieldset";
 import { Heading } from "@ui/Heading";
 import { Input } from "@ui/Input";
 import { Label } from "@ui/Label";
@@ -13,13 +12,13 @@ import { AspectRatio } from "@ui/primitives/AspectRatio";
 import { Strong, Text } from "@ui/Text";
 
 export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionary = (await getDictionnary(params.lang as Locale)) as Dictionary;
+  const dictionary = await getDictionnary(params.lang as Locale);
 
   return (
     <main className="flex w-full grow items-center justify-center">
       <div className="flex w-96 flex-col gap-y-4">
         <Heading>{dictionary.admin.login.connection}</Heading>
-        <Field className="flex gap-2">
+        <FieldSet className="flex gap-2">
           <form action={signInGoogle} className="w-1/2">
             <Button className="w-full" outline>
               <div className="w-4" data-slot="icon">
@@ -40,15 +39,15 @@ export default async function Page({ params }: { params: { lang: string } }) {
               Github
             </Button>
           </form>
-        </Field>
-        <Field>
+        </FieldSet>
+        <FieldSet>
           <Label htmlFor="email">Email</Label>
           <Input name="email" />
-        </Field>
-        <Field>
+        </FieldSet>
+        <FieldSet>
           <Label htmlFor="password">{dictionary.admin.login.pass}</Label>
           <Input name="password" type="password" />
-        </Field>
+        </FieldSet>
         <form>
           <Button className="w-full" type="submit" color={"blue"}>
             {dictionary.admin.login.connection}
