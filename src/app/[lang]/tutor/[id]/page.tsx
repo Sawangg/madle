@@ -29,10 +29,11 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
     studentFirstName: internship.studentFirstName ?? "",
     studentLastName: internship.studentLastName ?? "",
   }));
+  console.log(data);
 
   return (
     <main className="px-20 py-16 text-blue-900">
-      <h1 className="py-7 text-4xl font-semibold italic">Tutor review</h1>
+      <h1 className="py-7 text-4xl font-semibold italic"> Tutor review</h1>
       <TutorPreviewForm dictionary={dictionary} data={data[0]} />
     </main>
   );

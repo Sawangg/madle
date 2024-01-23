@@ -1,5 +1,6 @@
+"use server";
+
 import { redirect } from "next/navigation";
-import { and, eq, sql } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { tutorReviews } from "@db/schema";
@@ -10,12 +11,6 @@ const UpdateSchema = z.object({
   observation: z.string(),
   punctuality: z.boolean(),
 });
-
-export const getTutorReviewsByInternshipId = db
-  .select()
-  .from(tutorReviews)
-  .where(and(eq(tutorReviews.internshipId, sql.placeholder("internshipId"))))
-  .prepare("getTutorReviewsByInternship");
 
 export const insertTutorReview = async (data: { internshipId: string; observation: string; punctuality: boolean }) => {
   const result = UpdateSchema.safeParse(data);
