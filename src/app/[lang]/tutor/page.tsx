@@ -1,4 +1,5 @@
-import { getDictionary, type Locale } from "@lib/getDictionnary";
+import { getInternshipTutorTable } from "@db/prepared/internships";
+import { getDictionnary, type Locale } from "@lib/getDictionnary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 import StudentPreview from "@src/app/modules/StudentPreview";
 
@@ -7,35 +8,20 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
-  const column = {
-    date: dictionary.tutor.column.date,
-    company: dictionary.tutor.column.company,
-    contact: dictionary.tutor.column.contact,
-    internship: dictionary.tutor.column.internship,
-    document: dictionary.tutor.column.document,
-    content: dictionary.tutor.column.content,
-    status: dictionary.tutor.column.status,
+  const column: Record<string, string> = {
+    dateStart: dictionary.adm.column.datestart,
+    dateEnd: dictionary.adm.column.dateend,
+    studentName: dictionary.adm.column.student,
+    title: dictionary.adm.column.title,
+    company: dictionary.adm.column.company,
+    status: dictionary.adm.column.status,
   };
-  const data = [
-    {
-      date: "2022-01-01",
-      company: "DBA inc",
-      contact: "John Doe",
-      internship: "Architect",
-      document: "Resume",
-      content: "...",
-      status: "check",
-    },
-    {
-      date: "2022-02-01",
-      company: "ZAB com",
-      contact: "Emily Dupont",
-      internship: "Marketing digital",
-      document: "Cover Letter",
-      content: "...",
-      status: "not check",
-    },
-  ];
+  const data = (await getInternshipTutorTable.execute()).map((internship) => ({
+    ...internship,
+    dateStart: internship.dateStart.toISOString().split("T")[0],
+    dateEnd: internship.dateEnd.toISOString().split("T")[0],
+    studentName: internship.studentName ?? "",
+  }));
 
   return (
     <main className={"px-20 py-16 text-blue-900"}>
