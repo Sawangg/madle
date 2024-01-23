@@ -15,22 +15,41 @@ export default function CompletePreviewForm({ dictionary, selectedItem, closeFor
     Ended: "ended",
   } as Record<string, string>;
 
-  const [status, setStatus] = React.useState(statusMapping[selectedItem.Status]);
+  const [status, setStatus] = React.useState(statusMapping[selectedItem.status]);
 
   React.useEffect(() => {
-    setStatus(statusMapping[selectedItem.Status]);
+    setStatus(statusMapping[selectedItem.status]);
     // IMPORTANT: Do not add another dependency to this array as it will break the status change on the select
     // Next line is here to avoid the warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedItem.Status]);
+  }, [selectedItem.status]);
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setStatus(event.target.value);
   };
 
+  const updateStatus = (id: string, status: string) => async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const statusValue = Object.keys(statusMapping).find((key) => statusMapping[key] === status) ?? "";
+    const requestBody = { id: id.toString(), status: statusValue.toString() };
+    const res = await fetch("/api/internships/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    if (res.status === 200) {
+      closeForm();
+      location.reload();
+    } else {
+      console.log("Error, status code: ", res.status);
+    }
+  };
+
   return (
     <div className={"mt-3 bg-gray-50"}>
-      <form className={"rounded border bg-gray-50 p-4"}>
+      <form className={"rounded border bg-gray-50 p-4"} onSubmit={updateStatus(selectedItem.id, status)}>
         <h2 className={"font-bold"}>
           {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
           {dictionary.previewform.title}
@@ -38,7 +57,7 @@ export default function CompletePreviewForm({ dictionary, selectedItem, closeFor
         <section className={"flex flex-col justify-center"}>
           <div className="flex flex-col p-2">
             <label htmlFor={"status"}>{dictionary.adm.form.name}</label>
-            <input type="text" id={"name"} className="border p-2" value={selectedItem.Student} disabled />
+            <input type="text" id={"name"} className="border p-2" value={selectedItem.student} disabled />
           </div>
           <div className="flex flex-col p-2">
             <label htmlFor={"status"}>{dictionary.adm.form.status}</label>
