@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { isTutor } from "@actions/isTutor";
 import { getInternshipTutorTable } from "@db/prepared/internships";
+import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { CustomTable } from "@src/app/modules/CustomTable";
 import StudentPreview from "@src/app/modules/StudentPreview";
@@ -10,6 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
+  // Tutor check
+  const session = await auth();
+  const tutor = await isTutor(session!.user!.email!);
+  if (!tutor) return redirect("/");
+
   const dictionary = await getDictionary(params.lang);
 
   // Column key and its name in the table (based on language)

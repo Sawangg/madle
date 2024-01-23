@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { db } from "@db/index";
 import { users } from "@db/schema";
 import { db } from "@src/db";
 
@@ -20,8 +19,10 @@ const SignupSchema = z
   });
 
 export const signup = async (formData: FormData) => {
+  console.log("Received form data", formData);
   const result = SignupSchema.safeParse(Object.fromEntries(formData.entries()));
   if (!result.success) {
+    console.log("Error parsing form data", result.error);
     return { message: result.error };
   }
   // TODO: salt password
