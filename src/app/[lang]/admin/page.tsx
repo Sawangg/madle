@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@actions/isAdmin";
 import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import { CustomTable } from "@src/app/modules/CustomTable";
+import { Button } from "@ui/Button";
 
 export const metadata: Metadata = {
   title: "Madle - Admin part",
@@ -49,7 +50,40 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
       <h1 className="py-7 text-4xl font-semibold italic">{dictionary.adm.title}</h1>
       <section>
         <h2 className="py-4 text-2xl underline">{dictionary.adm.internshiptitle}</h2>
-        <CustomTable columns={column} data={data} dictionary={dictionary} adminPage />
+        <table className="w-full border-collapse border">
+          <thead>
+            <tr className="bg-gray-200">
+              {Object.entries(column).map(([_, value], index) => (
+                <th key={index} className="border p-2">
+                  {value}
+                </th>
+              ))}
+              <th className="border p-2">{dictionary.customtable.preview}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, rowIndex) => {
+              return (
+                <tr key={rowIndex} className="text-center">
+                  {Object.keys(column).map((columnKey, columnIndex) => (
+                    <td key={columnIndex} className="border p-2">
+                      {columnKey == "status"
+                        ? (dictionary.adm.form as Record<string, string>)[item[columnKey]]
+                        : (item as Record<string, string>)[columnKey]}
+                    </td>
+                  ))}
+                  <td className="border p-2">
+                    <Link href={`/admin/${item.id}`}>
+                      <Button type="submit" color="blue">
+                        {dictionary.customtable.preview}
+                      </Button>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </section>
     </main>
   );

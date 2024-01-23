@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@lib/getDictionnary";
-import AdminPreviewForm from "@src/app/modules/AdminPreviewForm";
 import CompletePreviewForm from "@src/app/modules/CompletePreviewForm";
 import { Button } from "@ui/Button";
 
@@ -11,10 +10,9 @@ type CustomTableProps = {
   data: Record<string, string>[];
   dictionary: Dictionary;
   previewEditable?: boolean;
-  adminPage?: boolean;
 };
 
-export function CustomTable({ columns, data, dictionary, previewEditable, adminPage }: Readonly<CustomTableProps>) {
+export function CustomTable({ columns, data, dictionary, previewEditable }: Readonly<CustomTableProps>) {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Record<string, string> | null>(null);
 
@@ -55,7 +53,9 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
               <tr key={rowIndex} className="text-center">
                 {Object.keys(columns).map((columnKey, columnIndex) => (
                   <td key={columnIndex} className="border p-2">
-                    {item[columnKey]}
+                    {columnKey == "status"
+                      ? (dictionary.adm.form as Record<string, string>)[item[columnKey]]
+                      : item[columnKey]}
                   </td>
                 ))}
                 <td className="border p-2">
@@ -69,7 +69,7 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
         </tbody>
       </table>
 
-      {isFormOpen && selectedItem && !adminPage && (
+      {isFormOpen && selectedItem && (
         <CompletePreviewForm
           dictionary={dictionary}
           selectedItem={selectedItem}
@@ -78,9 +78,6 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
           handleInputChange={handleInputChange}
           previewEditable={previewEditable}
         />
-      )}
-      {isFormOpen && adminPage && selectedItem && (
-        <AdminPreviewForm dictionary={dictionary} selectedItem={selectedItem} closeForm={closeForm} />
       )}
     </div>
   );
