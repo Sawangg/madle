@@ -84,3 +84,10 @@ export const evaluations = pgTable("evaluations", {
     .notNull()
     .references(() => internships.id, { onDelete: "cascade" }),
 });
+
+export const tutorReviews = pgTable("tutor_reviews", {
+  id: uuid("id").notNull().primaryKey(),
+  internshipId: uuid("internship_id"),
+  punctuality: boolean("punctuality").notNull(),
+  observation: text("observation").notNull(),
+});

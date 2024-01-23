@@ -5,7 +5,7 @@ import { getInternshipTutorTable } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { CustomTable } from "@src/app/modules/CustomTable";
-import StudentPreview from "@src/app/modules/StudentPreview";
+import PreviewTutor from "@src/app/modules/PreviewTutor";
 
 export const metadata: Metadata = {
   title: "Madle - Tutor part",
@@ -49,8 +49,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
         <CustomTable columns={column} data={data} dictionary={dictionary} />
       </section>
       <section>
-        <h2 className={"py-4 text-2xl underline"}>Preview</h2>
-        <StudentPreview studentName={"John Doe"} studentYear={"M2 APP LSI"} />
+        <PreviewTutor data={data} />
       </section>
     </main>
   );
