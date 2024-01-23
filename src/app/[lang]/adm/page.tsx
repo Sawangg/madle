@@ -36,7 +36,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
       <h1 className="py-7 text-4xl font-semibold italic">{dictionary.adm.title}</h1>
       <section>
         <h2 className="py-4 text-2xl underline">{dictionary.adm.internshiptitle}</h2>
-        <CustomTable columns={column} data={data} dictionary={dictionary} adminPage />
+        <CustomTable columns={column} data={data} lang={params.lang} adminPage />
       </section>
     </main>
   );

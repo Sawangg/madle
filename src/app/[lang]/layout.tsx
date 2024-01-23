@@ -11,7 +11,13 @@ export const metadata: Metadata = {
   description: "Madle internship platform",
 };
 
-export default function RootLayout({ children, params }: { children: React.ReactNode; params: { lang: Locale } }) {
+export default function RootLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: { lang: Locale };
+}>) {
   return (
     <html lang={params.lang} className={`${inter.className}`}>
       <body className="flex min-h-screen min-w-screen flex-col overflow-x-hidden">

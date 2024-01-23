@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import type { Dictionary } from "@public/locales/dictionary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 
 type FormProps = {
-  dictionary: Dictionary;
+  lang: Locale;
   selectedItem: Record<string, string>;
   closeForm: () => void;
 };
 
-export default function CompletePreviewForm({ dictionary, selectedItem, closeForm }: Readonly<FormProps>) {
+export default async function CompletePreviewForm({ lang, selectedItem, closeForm }: Readonly<FormProps>) {
+  const dictionary = await getDictionary(lang);
+
   const statusMapping = {
     Pending: "pending",
     "In progress": "inprogress",

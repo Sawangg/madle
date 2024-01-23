@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Madle internship platform",
 };
 
-export default async function Page({ params }: { params: { lang: Locale } }) {
+export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
   const dictionary = await getDictionary(params.lang);
 
   return (

@@ -12,7 +12,7 @@ import { Label } from "@ui/Label";
 import { AspectRatio } from "@ui/primitives/AspectRatio";
 import { Strong, Text } from "@ui/Text";
 
-export default async function Page({ params }: { params: { lang: Locale } }) {
+export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
   const dictionary = await getDictionary(params.lang);
 
   return (

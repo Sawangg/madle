@@ -6,7 +6,7 @@ type StudentPreviewProps = {
   studentYear: string;
 };
 
-export default function StudentPreview({ studentName, studentYear }: StudentPreviewProps) {
+export default function StudentPreview({ studentName, studentYear }: Readonly<StudentPreviewProps>) {
   return (
     <div className="mb-5 rounded border bg-gray-50 p-5">
       <form>

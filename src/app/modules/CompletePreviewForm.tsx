@@ -1,8 +1,8 @@
-import type { Dictionary } from "@public/locales/dictionary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 
 type FormProps = {
-  dictionary: Dictionary;
+  lang: Locale;
   selectedItem: Record<string, string>;
   columns: Record<string, string>;
   closeForm: () => void;
@@ -10,14 +10,16 @@ type FormProps = {
   previewEditable?: boolean;
 };
 
-export default function CompletePreviewForm({
-  dictionary,
+export default async function CompletePreviewForm({
+  lang,
   selectedItem,
   columns,
   closeForm,
   handleInputChange,
   previewEditable,
 }: Readonly<FormProps>) {
+  const dictionary = await getDictionary(lang);
+
   return (
     <div className="mt-3 bg-gray-50">
       <form className="rounded border bg-gray-50 p-4">

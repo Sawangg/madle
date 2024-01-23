@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   title: "Madle — Admin",
 };
 
-export default function AdminLayout({ children }: { children: React.ReactNode; params: { lang: Locale } }) {
+export default function AdminLayout({ children }: Readonly<{ children: React.ReactNode; params: { lang: Locale } }>) {
   return <main className="min-h-screen min-w-screen overflow-x-hidden">{children}</main>;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Dictionary } from "@public/locales/dictionary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import AdminPreviewForm from "@src/app/modules/AdminPreviewForm";
 import CompletePreviewForm from "@src/app/modules/CompletePreviewForm";
 import { Button } from "@ui/Button";
@@ -9,12 +9,14 @@ import { Button } from "@ui/Button";
 type CustomTableProps = {
   columns: Record<string, string>;
   data: Record<string, string>[];
-  dictionary: Dictionary;
+  lang: Locale;
   previewEditable?: boolean;
   adminPage?: boolean;
 };
 
-export function CustomTable({ columns, data, dictionary, previewEditable, adminPage }: Readonly<CustomTableProps>) {
+export async function CustomTable({ columns, data, lang, previewEditable, adminPage }: Readonly<CustomTableProps>) {
+  const dictionary = await getDictionary(lang);
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Record<string, string> | null>(null);
 
@@ -71,7 +73,7 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
 
       {isFormOpen && selectedItem && !adminPage && (
         <CompletePreviewForm
-          dictionary={dictionary}
+          lang={lang}
           selectedItem={selectedItem}
           columns={columns}
           closeForm={closeForm}
@@ -80,7 +82,7 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
         />
       )}
       {isFormOpen && adminPage && selectedItem && (
-        <AdminPreviewForm dictionary={dictionary} selectedItem={selectedItem} closeForm={closeForm} />
+        <AdminPreviewForm lang={lang} selectedItem={selectedItem} closeForm={closeForm} />
       )}
     </div>
   );
