@@ -54,7 +54,7 @@ export const internships = pgTable("internships", {
   dateStart: timestamp("date_start", { mode: "date" }).notNull(),
   dateEnd: timestamp("date_end", { mode: "date" }).notNull(),
   company: text("company").notNull(),
-  status: text("status").$type<"In progress" | "Pending" | "Ended">().notNull(),
+  status: text("status").$type<"inprogress" | "pending" | "ended">().notNull(),
   studentId: uuid("student_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),

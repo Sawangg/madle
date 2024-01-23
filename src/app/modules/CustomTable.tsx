@@ -55,7 +55,9 @@ export function CustomTable({ columns, data, dictionary, previewEditable, adminP
               <tr key={rowIndex} className="text-center">
                 {Object.keys(columns).map((columnKey, columnIndex) => (
                   <td key={columnIndex} className="border p-2">
-                    {item[columnKey]}
+                    {columnKey == "status"
+                      ? (dictionary.adm.form as Record<string, string>)[item[columnKey]]
+                      : item[columnKey]}
                   </td>
                 ))}
                 <td className="border p-2">
