@@ -42,7 +42,7 @@ export default function CompletePreviewForm({
             {dictionary.previewform.close}
           </button>
           {previewEditable && (
-            <Button type="submit" color={"blue"}>
+            <Button type="submit" color="blue">
               {dictionary.previewform.save}
             </Button>
           )}
