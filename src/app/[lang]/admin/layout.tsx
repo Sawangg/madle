@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { auth, signOut } from "@lib/auth";
-import { getDictionnary, type Locale } from "@lib/getDictionnary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 
 export const metadata: Metadata = {
   title: "Madle — Admin",
@@ -14,7 +14,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  const dictionnary = await getDictionnary(params.lang as Locale);
+  const dictionnary = await getDictionary(params.lang as Locale);
   const session = await auth();
 
   return (

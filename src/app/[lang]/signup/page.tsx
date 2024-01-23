@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { signup } from "@actions/auth/signup";
-import { getDictionnary, type Locale } from "@lib/getDictionnary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 import { FieldSet } from "@ui/Fieldset";
 import { Heading } from "@ui/Heading";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionary = await getDictionnary(params.lang as Locale);
+  const dictionary = await getDictionary(params.lang as Locale);
 
   return (
     <main className="flex w-full grow items-center justify-center">

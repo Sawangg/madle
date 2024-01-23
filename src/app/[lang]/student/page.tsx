@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getDictionnary, type Locale } from "@lib/getDictionnary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import AddInternshipForm from "@src/app/modules/AddInternshipFrom";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ params }: Readonly<{ params: { lang: string } }>) {
-  const dictionary = await getDictionnary(params.lang as Locale);
+  const dictionary = await getDictionary(params.lang as Locale);
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)

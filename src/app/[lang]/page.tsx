@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { signInCredentials } from "@actions/auth/login/signInCredentials";
 import { signInGithub } from "@actions/auth/login/signInGithub";
 import { signInGoogle } from "@actions/auth/login/signInGoogle";
-import { getDictionnary, type Locale } from "@lib/getDictionnary";
+import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 import { FieldSet } from "@ui/Fieldset";
 import { Heading } from "@ui/Heading";
@@ -12,7 +13,7 @@ import { AspectRatio } from "@ui/primitives/AspectRatio";
 import { Strong, Text } from "@ui/Text";
 
 export default async function Page({ params }: { params: { lang: string } }) {
-  const dictionary = await getDictionnary(params.lang as Locale);
+  const dictionary = await getDictionary(params.lang as Locale);
 
   return (
     <main className="flex w-full grow items-center justify-center">
@@ -40,14 +41,14 @@ export default async function Page({ params }: { params: { lang: string } }) {
             </Button>
           </form>
         </div>
-        <form className="flex flex-col gap-y-4">
+        <form action={signInCredentials} className="flex flex-col gap-y-4">
           <FieldSet>
             <Label htmlFor="email">Email</Label>
-            <Input name="email" />
+            <Input id="email" name="email" />
           </FieldSet>
           <FieldSet>
             <Label htmlFor="password">{dictionary.admin.login.pass}</Label>
-            <Input name="password" type="password" />
+            <Input id="password" name="password" type="password" />
           </FieldSet>
           <Button className="w-full" type="submit" color="blue">
             {dictionary.admin.login.connection}
