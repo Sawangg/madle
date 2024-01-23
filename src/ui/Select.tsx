@@ -6,6 +6,7 @@ import {
   Popover,
   Select as RASelect,
   SelectValue,
+  type ListBoxItemProps,
   type SelectProps as RASelectProps,
 } from "react-aria-components";
 import { ChevronUpDownIcon } from "./icons/ChevronUpDownIcon";
@@ -38,10 +39,20 @@ export const Select: React.FC<SelectProps> = ({ label, className, children, ...p
   </RASelect>
 );
 
-export type OptionProps = React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
+export type OptionProps = Omit<
+  React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
+  "value" | "ref"
+> &
+  Omit<ListBoxItemProps<object>, "value"> & {
+    value: string;
+  };
 
-export const Option: React.FC<OptionProps> = ({ children }) => (
-  <ListBoxItem className="dark:text-white cursor-pointer rounded-md pl-1 focus:outline-none data-[hovered]:bg-blue-500 data-[hovered]:text-white">
+export const Option: React.FC<OptionProps> = ({ children, value, ...props }) => (
+  <ListBoxItem
+    id={value}
+    className="dark:text-white cursor-pointer rounded-md pl-1 focus:outline-none data-[hovered]:bg-blue-500 data-[hovered]:text-white"
+    {...props}
+  >
     {children}
   </ListBoxItem>
 );

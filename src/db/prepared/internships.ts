@@ -17,8 +17,22 @@ export const getAllInternshipsWithStudentName = db
   .innerJoin(users, eq(internships.studentId, users.id))
   .prepare("getAllInternships");
 
-export const updateInternshipStatus = (status: "In progress" | "Pending" | "Ended", id: string) =>
-  db.update(internships).set({ status }).where(eq(internships.id, id)).prepare("updateInternshipStatus");
+export const getInternshipByIdWithStudentName = (id: string) =>
+  db
+    .select({
+      id: internships.id,
+      title: internships.title,
+      dateStart: internships.dateStart,
+      dateEnd: internships.dateEnd,
+      company: internships.company,
+      status: internships.status,
+      studentFirstName: users.firstName,
+      studentLastName: users.lastName,
+    })
+    .from(internships)
+    .innerJoin(users, eq(internships.studentId, users.id))
+    .where(eq(internships.id, id))
+    .prepare("getInternshipById");
 
 export const getInternshipTutorTable = db
   .select({

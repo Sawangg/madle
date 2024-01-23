@@ -8,10 +8,10 @@ import { Button } from "@ui/Button";
 type FormProps = {
   dictionary: Dictionary;
   selectedItem: Record<string, string>;
-  closeForm: () => void;
+  columns: Record<string, string>;
 };
 
-export default function AdminPreviewForm({ dictionary, selectedItem, closeForm }: FormProps) {
+export default function AdminPreviewForm({ dictionary, selectedItem, columns }: Readonly<FormProps>) {
   const updateInternshipWithId = async () => {
     const data = {
       id: selectedItem.id.toString(),
@@ -35,16 +35,17 @@ export default function AdminPreviewForm({ dictionary, selectedItem, closeForm }
 
   return (
     <div className="mt-3 bg-gray-50">
-      <form
-        className="rounded border bg-gray-50 p-4"
-        action={updateInternshipWithId}
-      >
+      <form className="rounded border bg-gray-50 p-4" action={updateInternshipWithId}>
         <h2 className="font-bold">{dictionary.previewform.title}</h2>
         <section className="flex flex-col justify-center">
-          <div className="flex flex-col p-2">
-            <label htmlFor="status">{dictionary.adm.form.name}</label>
-            <input type="text" id="name" className="border p-2" value={selectedItem.studentName} disabled />
-          </div>
+          {Object.entries(selectedItem)
+            .filter(([key]) => columns[key])
+            .map(([key, value], index) => (
+              <div key={index} className="flex flex-col p-2">
+                <label htmlFor={`input-${index}`}>{columns[key]}</label>
+                <input type="text" id={`input-${index}`} className="border p-2" value={value} disabled={true} />
+              </div>
+            ))}
           <div className="flex flex-col p-2">
             <label htmlFor="status">{dictionary.adm.form.status}</label>
             <select id="status" name="status" value={status} onChange={handleStatusChange} className="border p-2">
@@ -55,9 +56,6 @@ export default function AdminPreviewForm({ dictionary, selectedItem, closeForm }
           </div>
         </section>
         <section className="flex justify-evenly">
-          <button onClick={closeForm} className="rounded bg-blue-900 p-3 text-center text-white">
-            {dictionary.previewform.close}
-          </button>
           <Button type="submit" color="blue">
             {dictionary.previewform.save}
           </Button>

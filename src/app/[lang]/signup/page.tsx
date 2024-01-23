@@ -6,8 +6,7 @@ import { FieldSet } from "@ui/Fieldset";
 import { Heading } from "@ui/Heading";
 import { Input } from "@ui/Input";
 import { Label } from "@ui/Label";
-
-//import { Option, Select } from "@ui/Select";
+import { Option, Select } from "@ui/Select";
 
 export const metadata: Metadata = {
   title: "Madle - Student part",
@@ -24,19 +23,11 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
           <Heading>Sign Up</Heading>
           <FieldSet className="flex flex-col" isRequired>
             <Label htmlFor="userType">{dictionary.admin.signup.typeUser}</Label>
-            {/*}
-            TODO : Fix this custom component to recover the correct selected value on submit
             <Select label="userType" name="userType" id="userType" isRequired>
               <Option value="student">{dictionary.admin.signup.student}</Option>
               <Option value="tutor">{dictionary.admin.signup.tutor}</Option>
               <Option value="admin">{dictionary.admin.signup.administrator}</Option>
             </Select>
-            */}
-            <select aria-label="userType" name="userType" id="userType" required className="...">
-              <option value="student">{dictionary.admin.signup.student}</option>
-              <option value="tutor">{dictionary.admin.signup.tutor}</option>
-              <option value="admin">{dictionary.admin.signup.administrator}</option>
-            </select>
           </FieldSet>
           <FieldSet>
             <Label htmlFor="email">Email</Label>
