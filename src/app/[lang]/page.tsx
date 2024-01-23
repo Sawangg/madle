@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { signInCredentials } from "@actions/auth/login/signInCredentials";
 import { signInGithub } from "@actions/auth/login/signInGithub";
 import { signInGoogle } from "@actions/auth/login/signInGoogle";
+import { preparedUserEmail } from "@db/prepared/preparedUserEmail";
+import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
 import { FieldSet } from "@ui/Fieldset";
@@ -14,6 +17,15 @@ import { Strong, Text } from "@ui/Text";
 
 export default async function Page({ params }: Readonly<{ params: { lang: Locale } }>) {
   const dictionary = await getDictionary(params.lang);
+
+  const session = await auth();
+  const user = await preparedUserEmail.execute({ email: session?.user?.email });
+  if (user.length > 0) {
+    if (user[0].role === "admin") redirect("/admin");
+    if (user[0].role === "student") redirect("/student");
+    if (user[0].role === "tutor") redirect("/tutor");
+    else redirect("/");
+  }
 
   return (
     <main className="flex w-full grow items-center justify-center">
