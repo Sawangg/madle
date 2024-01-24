@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Link } from "react-aria-components";
 import { isTutor } from "@actions/isTutor";
 import { getInternshipTutorTable } from "@db/prepared/internships";
+import { getAllTutorsPreview } from "@db/prepared/tutorsPreview";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
@@ -43,7 +44,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   }));
   // TO DO :
   // Check if tutorPreview is complete
-
+  const tutorPreview = (await getAllTutorsPreview.execute()).map((tutorPreview) => ({
+    ...tutorPreview,
+  }));
 
   return (
     <main className={"px-20 py-16 text-blue-900"}>
@@ -74,7 +77,11 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                   ))}
                   <td className="border p-2">
                     {/* if complete */}
-                    <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
+                    {tutorPreview.find((tutor) => tutor.internshipId === item.id) ? (
+                      <img src="/assets/icons8-vérifié.svg" alt="eye" className="m-auto" />
+                    ) : (
+                      <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
+                    )}
                   </td>
                   <td className="border p-2">
                     <Link href={`/tutor/${item.id}`}>

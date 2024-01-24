@@ -43,6 +43,7 @@ export const getInternshipTutorTable = db
     company: internships.company,
     status: internships.status,
     studentId: internships.studentId,
+    tutorId: internships.tutorId,
     studentFirstName: users.firstName,
     studentLastName: users.lastName,
   })
