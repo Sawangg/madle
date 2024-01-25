@@ -53,11 +53,11 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
           </section>
 
           <section className="mt-5">
-            <h2 className={"text-2xl font-semibold italic"}>Ponctualité au travail</h2>
+            <h2 className={"text-2xl font-semibold italic"}>{dictionary.previewtutor.punctuality}</h2>
             <article className={"grid grid-cols-2 grid-rows-2 gap-4"}>
-              <p className={"col-span-2"}>Le stagiaire est-il renseigner de lui meme sur les horaires a respecter ?</p>
+              <p className={"col-span-2"}>{dictionary.previewtutor.punctualityComment}</p>
               <div className={"grid grid-cols-2 items-center justify-items-center"}>
-                <label htmlFor="oui">Oui</label>
+                <label htmlFor="oui">{dictionary.previewtutor.yes}</label>
                 <input
                   type="radio"
                   id="oui"
@@ -68,7 +68,7 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
                 />
               </div>
               <div className={"grid grid-cols-2 items-center justify-items-center"}>
-                <label htmlFor="non">Non</label>
+                <label htmlFor="non">{dictionary.previewtutor.no}</label>
                 <input
                   type="radio"
                   id="non"
@@ -82,13 +82,13 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
           </section>
 
           <div className={"mt-5 rounded border p-5"}>
-            <h2 className={"text-2xl font-semibold italic"}>Observations</h2>
+            <h2 className={"text-2xl font-semibold italic"}>{dictionary.previewtutor.observation}</h2>
             <TextArea name={"observation"} onChange={handleObservation}></TextArea>
           </div>
 
           <div className={"mt-5 text-center"}>
             <Button className="w-40" type="submit">
-              Save
+              {dictionary.previewtutor.submit}
             </Button>
           </div>
         </form>

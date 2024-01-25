@@ -38,9 +38,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   return (
     <main className="px-20 py-16 text-blue-900">
       <Link href={`/tutor`}>
-        <Button color="blue">Back</Button>
+        <Button color="blue">{dictionary.previewtutor.back}</Button>
       </Link>
-      <h1 className="py-7 text-4xl font-semibold italic"> Tutor review</h1>
+      <h1 className="py-7 text-4xl font-semibold italic">{dictionary.previewtutor.title}</h1>
       <TutorPreviewForm dictionary={dictionary} data={data[0]} />
     </main>
   );

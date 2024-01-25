@@ -63,7 +63,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                   {value}
                 </th>
               ))}
-              <th className="border p-2">Review</th>
+              <th className="border p-2">{dictionary.customtable.evalComplete}</th>
               <th className="border p-2">{dictionary.customtable.preview}</th>
             </tr>
           </thead>
@@ -84,7 +84,6 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                     ) : (
                       <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
                     )}
-
                   </td>
                   <td className="border p-2">
                     <Link href={`/tutor/${item.id}`}>
