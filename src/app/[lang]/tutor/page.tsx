@@ -42,8 +42,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
     studentFirstName: internship.studentFirstName ?? "",
     studentLastName: internship.studentLastName ?? "",
   }));
-  // TO DO :
-  // Check if tutorPreview is complete
+  // TO DO : Check if tutorPreview is complete
   const tutorPreview = (await getAllTutorsPreview.execute()).map((tutorPreview) => ({
     ...tutorPreview,
   }));
@@ -76,12 +75,12 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                     </td>
                   ))}
                   <td className="border p-2">
-                    {/* if complete */}
                     {tutorPreview.find((tutor) => tutor.internshipId === item.id) ? (
                       <img src="/assets/icons8-vérifié.svg" alt="eye" className="m-auto" />
                     ) : (
                       <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
                     )}
+
                   </td>
                   <td className="border p-2">
                     <Link href={`/tutor/${item.id}`}>
