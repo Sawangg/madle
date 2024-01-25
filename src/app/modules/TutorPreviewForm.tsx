@@ -39,13 +39,13 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
 
   return (
     <div>
-      <h2 className={"py-4 text-2xl underline"}>Review</h2>
+      <h2 className="py-4 text-2xl underline">Review</h2>
       {/* -- Review -- */}
-      <div className={"mb-5 rounded border bg-gray-50 p-5"}>
+      <div className="mb-5 rounded border bg-gray-50 p-5">
         <form action={updateTutorReview}>
-          <section className={"mt-5"}>
-            <h2 className={"text-2xl font-semibold italic"}>{dictionary.adm.column.student}</h2>
-            <article className={"flex flex-col pl-5 pt-3"}>
+          <section className="mt-5">
+            <h2 className="text-2xl font-semibold italic">{dictionary.adm.column.student}</h2>
+            <article className="flex flex-col pl-5 pt-3">
               <label htmlFor={"StudentYear"}>{data.studentName.toUpperCase()}</label>
               <label htmlFor={"studentTitle"}>{data.title}</label>
               <label htmlFor={"studentCompany"}>{data.company}</label>
@@ -53,40 +53,40 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
           </section>
 
           <section className="mt-5">
-            <h2 className={"text-2xl font-semibold italic"}>{dictionary.previewtutor.punctuality}</h2>
-            <article className={"grid grid-cols-2 grid-rows-2 gap-4"}>
-              <p className={"col-span-2"}>{dictionary.previewtutor.punctualityComment}</p>
-              <div className={"grid grid-cols-2 items-center justify-items-center"}>
+            <h2 className="text-2xl font-semibold italic">{dictionary.previewtutor.punctuality}</h2>
+            <article className="grid grid-cols-2 grid-rows-2 gap-4">
+              <p className="col-span-2">{dictionary.previewtutor.punctualityComment}</p>
+              <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="oui">{dictionary.previewtutor.yes}</label>
                 <input
                   type="radio"
                   id="oui"
                   name="punctuality"
                   value="true"
-                  width={"10"}
+                  width="10"
                   onChange={handlePunctuality}
                 />
               </div>
-              <div className={"grid grid-cols-2 items-center justify-items-center"}>
+              <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="non">{dictionary.previewtutor.no}</label>
                 <input
                   type="radio"
                   id="non"
                   name="punctuality"
                   value="false"
-                  width={"10"}
+                  width="10"
                   onChange={handlePunctuality}
                 />
               </div>
             </article>
           </section>
 
-          <div className={"mt-5 rounded border p-5"}>
-            <h2 className={"text-2xl font-semibold italic"}>{dictionary.previewtutor.observation}</h2>
-            <TextArea name={"observation"} onChange={handleObservation}></TextArea>
+          <div className="mt-5 rounded border p-5">
+            <h2 className="text-2xl font-semibold italic">{dictionary.previewtutor.observation}</h2>
+            <TextArea name="observation" onChange={handleObservation}></TextArea>
           </div>
 
-          <div className={"mt-5 text-center"}>
+          <div className="mt-5 text-center">
             <Button className="w-40" type="submit">
               {dictionary.previewtutor.submit}
             </Button>

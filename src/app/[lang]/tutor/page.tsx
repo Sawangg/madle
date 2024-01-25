@@ -52,8 +52,8 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   }));
 
   return (
-    <main className={"px-20 py-16 text-blue-900"}>
-      <h1 className={"py-7 text-4xl font-semibold italic"}>{dictionary.tutor.title}</h1>
+    <main className="px-20 py-16 text-blue-900">
+      <h1 className="py-7 text-4xl font-semibold italic">{dictionary.tutor.title}</h1>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full border-collapse border">
           <thead>
