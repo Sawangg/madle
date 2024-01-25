@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import { isTutor } from "@actions/isTutor";
 import { getInternshipByIdWithStudentName } from "@db/prepared/internships";
+import { preparedUserEmail } from "@db/prepared/preparedUserEmail";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import TutorPreviewForm from "@src/app/modules/TutorPreviewForm";
+import { Button } from "@ui/Button";
 
 export const metadata: Metadata = {
   title: "Madle - Tutor review",
@@ -14,8 +16,11 @@ export const metadata: Metadata = {
 export default async function Page({ params }: Readonly<{ params: { lang: Locale; id: string } }>) {
   // Tutor check
   const session = await auth();
-  const tutor = await isTutor(session!.user!.email!);
-  if (!tutor) return redirect("/");
+  if (session?.user?.email !== undefined) {
+    const user = await preparedUserEmail.execute({ email: session?.user?.email });
+    if (user.length === 0) redirect("/");
+    if (user[0].role !== "tutor") redirect("/");
+  }
   const dictionary = await getDictionary(params.lang);
 
   const data = (await getInternshipByIdWithStudentName(params.id).execute()).map((internship) => ({
@@ -32,6 +37,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
 
   return (
     <main className="px-20 py-16 text-blue-900">
+      <Link href={`/tutor`}>
+        <Button color="blue">Back</Button>
+      </Link>
       <h1 className="py-7 text-4xl font-semibold italic"> Tutor review</h1>
       <TutorPreviewForm dictionary={dictionary} data={data[0]} />
     </main>
