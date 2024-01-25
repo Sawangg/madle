@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Link } from "react-aria-components";
 import { getInternshipTutorTableByTutorId } from "@db/prepared/internships";
@@ -7,7 +8,6 @@ import { getAllTutorsPreview } from "@db/prepared/tutorsPreview";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Madle - Tutor part",
