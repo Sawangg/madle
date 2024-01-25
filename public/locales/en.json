@@ -83,6 +83,7 @@
     "yes": "Yes",
     "no": "No",
     "observation": "Observation",
-    "submit": "Submit"
+    "submit": "Submit",
+    "done": "Information for this evaluation as been already done."
   }
 }

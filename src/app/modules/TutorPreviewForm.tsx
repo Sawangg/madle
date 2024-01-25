@@ -6,11 +6,19 @@ import type { Dictionary } from "@lib/getDictionnary";
 import { TextArea } from "@src/ui/TextArea";
 import { Button } from "@ui/Button";
 
+type TutorPreview = {
+  internshipId: string;
+  id: string;
+  observation: string;
+  punctuality: boolean;
+};
+
 type PreviewTutorProps = {
   dictionary: Dictionary;
   data: Record<string, string>;
+  tutorPreview: TutorPreview;
 };
-export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewTutorProps>) {
+export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Readonly<PreviewTutorProps>) {
   const [observation, setObservation] = React.useState("");
   const [punctuality, setPunctuality] = React.useState("");
 
@@ -45,7 +53,7 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
         <form action={updateTutorReview}>
           <section className="mt-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.adm.column.student}</h2>
-            <article className="flex flex-col pl-5 pt-3">
+            <article className="flex flex-col pl-5 pt-3 font-semibold text-black">
               <label htmlFor={"StudentYear"}>{data.studentName.toUpperCase()}</label>
               <label htmlFor={"studentTitle"}>{data.title}</label>
               <label htmlFor={"studentCompany"}>{data.company}</label>
@@ -58,18 +66,91 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
               <p className="col-span-2">{dictionary.previewtutor.punctualityComment}</p>
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="oui">{dictionary.previewtutor.yes}</label>
-                <input type="radio" id="oui" name="punctuality" value="true" width="10" onChange={handlePunctuality} />
+                {typeof tutorPreview !== "undefined" ? (
+                  tutorPreview.punctuality ? (
+                    <input
+                      type="radio"
+                      id="non"
+                      name="punctuality"
+                      value="false"
+                      width="10"
+                      onChange={handlePunctuality}
+                      checked
+                      disabled
+                    />
+                  ) : (
+                    <input
+                      type="radio"
+                      id="non"
+                      name="punctuality"
+                      value="false"
+                      width="10"
+                      onChange={handlePunctuality}
+                      disabled
+                    />
+                  )
+                ) : (
+                  <input
+                    type="radio"
+                    id="oui"
+                    name="punctuality"
+                    value="true"
+                    width="10"
+                    onChange={handlePunctuality}
+                  />
+                )}
               </div>
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="non">{dictionary.previewtutor.no}</label>
-                <input type="radio" id="non" name="punctuality" value="false" width="10" onChange={handlePunctuality} />
+                {typeof tutorPreview !== "undefined" ? (
+                  !tutorPreview.punctuality ? (
+                    <input
+                      type="radio"
+                      id="non"
+                      name="punctuality"
+                      value="false"
+                      width="10"
+                      onChange={handlePunctuality}
+                      checked
+                      disabled
+                    />
+                  ) : (
+                    <input
+                      type="radio"
+                      id="non"
+                      name="punctuality"
+                      value="false"
+                      width="10"
+                      onChange={handlePunctuality}
+                      disabled
+                    />
+                  )
+                ) : (
+                  <input
+                    type="radio"
+                    id="non"
+                    name="punctuality"
+                    value="false"
+                    width="10"
+                    onChange={handlePunctuality}
+                  />
+                )}
               </div>
             </article>
           </section>
 
           <div className="mt-5 rounded border p-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.previewtutor.observation}</h2>
-            <TextArea name="observation" onChange={handleObservation}></TextArea>
+            {typeof tutorPreview !== "undefined" ? (
+              <TextArea
+                name="observation"
+                onChange={handleObservation}
+                value={tutorPreview.observation}
+                disabled
+              ></TextArea>
+            ) : (
+              <TextArea name="observation" onChange={handleObservation}></TextArea>
+            )}
           </div>
 
           <div className="mt-5 text-center">

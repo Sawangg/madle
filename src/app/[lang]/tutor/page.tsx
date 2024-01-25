@@ -20,7 +20,6 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   let userId = "";
   if (session?.user?.email !== undefined) {
     const user = await preparedUserEmail.execute({ email: session?.user?.email });
-    console.log(user);
     if (user.length === 0) redirect("/");
     if (user[0].role !== "tutor") redirect("/");
     userId = user[0].id;

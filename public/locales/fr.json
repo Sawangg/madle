@@ -83,6 +83,7 @@
     "yes": "Oui",
     "no": "Non",
     "observation": "Observations",
-    "submit": "Soumettre"
+    "submit": "Soumettre",
+    "done": "Les informations ont déjà été completées."
   }
 }
