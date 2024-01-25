@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { internships, users } from "@db/schema";
+import { companies, internships, users } from "@db/schema";
 import { db } from "@src/db";
 
 export const getAllInternshipsWithStudentName = db
@@ -8,13 +8,14 @@ export const getAllInternshipsWithStudentName = db
     title: internships.title,
     dateStart: internships.dateStart,
     dateEnd: internships.dateEnd,
-    company: internships.company,
+    company: companies.name,
     status: internships.status,
     studentFirstName: users.firstName,
     studentLastName: users.lastName,
   })
   .from(internships)
   .innerJoin(users, eq(internships.studentId, users.id))
+  .innerJoin(companies, eq(internships.companyId, companies.id))
   .prepare("getAllInternships");
 
 export const getInternshipByIdWithStudentName = (id: string) =>
@@ -24,13 +25,14 @@ export const getInternshipByIdWithStudentName = (id: string) =>
       title: internships.title,
       dateStart: internships.dateStart,
       dateEnd: internships.dateEnd,
-      company: internships.company,
+      company: companies.name,
       status: internships.status,
       studentFirstName: users.firstName,
       studentLastName: users.lastName,
     })
     .from(internships)
     .innerJoin(users, eq(internships.studentId, users.id))
+    .innerJoin(companies, eq(internships.companyId, companies.id))
     .where(eq(internships.id, id))
     .prepare("getInternshipById");
 
@@ -40,7 +42,7 @@ export const getInternshipTutorTable = db
     title: internships.title,
     dateStart: internships.dateStart,
     dateEnd: internships.dateEnd,
-    company: internships.company,
+    company: companies.name,
     status: internships.status,
     studentId: internships.studentId,
     studentFirstName: users.firstName,
@@ -48,4 +50,5 @@ export const getInternshipTutorTable = db
   })
   .from(internships)
   .leftJoin(users, eq(internships.studentId, users.id))
+  .innerJoin(companies, eq(internships.companyId, companies.id))
   .prepare("getInternshipTutorTable");

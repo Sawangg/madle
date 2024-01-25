@@ -18,7 +18,7 @@ export default function AddInternshipForm({ studentId }) {
       dateStart: (document.getElementById("dateStart") as HTMLInputElement).value,
       dateEnd: (document.getElementById("dateEnd") as HTMLInputElement).value,
       title: (document.getElementById("title") as HTMLInputElement).value,
-      studentId: studentId,
+      studentId: studentId as string,
     };
     await addInternship(data);
   };
