@@ -81,9 +81,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                   ))}
                   <td className="border p-2">
                     {tutorPreview.find((tutor) => tutor.internshipId === item.id) ? (
-                      <Image src="/assets/icons8-vérifié.svg" alt="eye" className="m-auto" />
+                      <Image src="/assets/icons8-check.svg" alt="eye" className="m-auto" width="40" height="40" />
                     ) : (
-                      <Image src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
+                      <Image src="/assets/icons8-delete.svg" alt="eye" className="m-auto" width="40" height="40" />
                     )}
                   </td>
                   <td className="border p-2">
