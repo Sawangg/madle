@@ -29,6 +29,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
     studentFirstName: internship.studentFirstName ?? "",
     studentLastName: internship.studentLastName ?? "",
   }));
+  console.log(data);
 
   return (
     <main className="px-20 py-16 text-blue-900">
