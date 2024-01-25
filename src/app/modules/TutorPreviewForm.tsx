@@ -15,7 +15,7 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
   const [punctuality, setPunctuality] = React.useState("");
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleObservation = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleObservation = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setObservation(event.target.value);
   };
   const handlePunctuality = (event: React.ChangeEvent<HTMLInputElement>) => {
