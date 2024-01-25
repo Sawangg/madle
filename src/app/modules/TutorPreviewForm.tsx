@@ -58,25 +58,11 @@ export default function TutorPreviewForm({ dictionary, data }: Readonly<PreviewT
               <p className="col-span-2">{dictionary.previewtutor.punctualityComment}</p>
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="oui">{dictionary.previewtutor.yes}</label>
-                <input
-                  type="radio"
-                  id="oui"
-                  name="punctuality"
-                  value="true"
-                  width="10"
-                  onChange={handlePunctuality}
-                />
+                <input type="radio" id="oui" name="punctuality" value="true" width="10" onChange={handlePunctuality} />
               </div>
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="non">{dictionary.previewtutor.no}</label>
-                <input
-                  type="radio"
-                  id="non"
-                  name="punctuality"
-                  value="false"
-                  width="10"
-                  onChange={handlePunctuality}
-                />
+                <input type="radio" id="non" name="punctuality" value="false" width="10" onChange={handlePunctuality} />
               </div>
             </article>
           </section>

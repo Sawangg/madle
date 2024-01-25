@@ -7,6 +7,7 @@ import { getAllTutorsPreview } from "@db/prepared/tutorsPreview";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Madle - Tutor part",
@@ -80,9 +81,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                   ))}
                   <td className="border p-2">
                     {tutorPreview.find((tutor) => tutor.internshipId === item.id) ? (
-                      <img src="/assets/icons8-vérifié.svg" alt="eye" className="m-auto" />
+                      <Image src="/assets/icons8-vérifié.svg" alt="eye" className="m-auto" />
                     ) : (
-                      <img src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
+                      <Image src="/assets/icons8-effacer.svg" alt="eye" className="m-auto" />
                     )}
                   </td>
                   <td className="border p-2">
