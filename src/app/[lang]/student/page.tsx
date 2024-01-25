@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getUserId } from "@actions/getUserId";
 import { isStudent } from "@actions/isStudent";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import AddInternshipForm from "@src/app/modules/AddInternshipFrom";
+import AddInternshipForm from "@src/app/modules/AddInternshipForm";
 import { CustomTable } from "@src/app/modules/CustomTable";
 
 export const metadata: Metadata = {
@@ -16,6 +17,8 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   const session = await auth();
   const student = await isStudent(session!.user!.email!);
   if (!student) return redirect("/");
+
+  const studentId = await getUserId(session!.user!.email!);
 
   const dictionary = await getDictionary(params.lang);
 
@@ -54,7 +57,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
       </section>
       <section>
         <h2 className={"py-4 text-2xl underline"}>Add internship</h2>
-        <AddInternshipForm />
+        <AddInternshipForm studentId={studentId} />
       </section>
     </main>
   );
