@@ -46,7 +46,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
         ? `${internship.studentFirstName} ${internship.studentLastName}`
         : "",
   }));
-  const tutorPreview = (await getAllTutorsPreview.execute());
+  const tutorPreview = await getAllTutorsPreview.execute();
 
   return (
     <main className="px-20 py-16 text-blue-900">
