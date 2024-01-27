@@ -67,11 +67,23 @@
   },
   "customtable": {
     "preview": "Prévisualiser",
+    "evalComplete": "Evaluation completée",
     "seemore": "Voir plus"
   },
   "previewform": {
     "title": "Informations du stage",
     "close": "Fermer",
     "save": "Sauvegarder"
+  },
+  "previewtutor": {
+    "back": "<- Retour",
+    "title": "Informations du stage",
+    "punctuality": "Ponctualité au travail",
+    "punctualityComment": "Le stagiaire est-il informé des horaires à respecter ?",
+    "yes": "Oui",
+    "no": "Non",
+    "observation": "Observations",
+    "submit": "Soumettre",
+    "done": "Les informations ont déjà été completées."
   }
 }
