@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { insertTutorReview } from "@actions/reviewTutor";
 import type { Dictionary } from "@lib/getDictionnary";
 import { TextArea } from "@src/ui/TextArea";
@@ -19,8 +19,8 @@ type PreviewTutorProps = {
   tutorPreview: TutorPreview;
 };
 export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Readonly<PreviewTutorProps>) {
-  const [observation, setObservation] = React.useState("");
-  const [punctuality, setPunctuality] = React.useState("");
+  const [observation, setObservation] = useState("");
+  const [punctuality, setPunctuality] = useState("");
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleObservation = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,9 +54,9 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
           <section className="mt-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.adm.column.student}</h2>
             <article className="flex flex-col pl-5 pt-3 font-semibold text-black">
-              <label htmlFor={"StudentYear"}>{data.studentName.toUpperCase()}</label>
-              <label htmlFor={"studentTitle"}>{data.title}</label>
-              <label htmlFor={"studentCompany"}>{data.company}</label>
+              <label htmlFor="StudentYear">{data.studentName.toUpperCase()}</label>
+              <label htmlFor="studentTitle">{data.title}</label>
+              <label htmlFor="studentCompany">{data.company}</label>
             </article>
           </section>
 

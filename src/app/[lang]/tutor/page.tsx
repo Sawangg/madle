@@ -46,10 +46,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
         ? `${internship.studentFirstName} ${internship.studentLastName}`
         : "",
   }));
-  // TO DO : Check if tutorPreview is complete
-  const tutorPreview = (await getAllTutorsPreview.execute()).map((tutorPreview) => ({
-    ...tutorPreview,
-  }));
+  const tutorPreview = (await getAllTutorsPreview.execute());
 
   return (
     <main className="px-20 py-16 text-blue-900">

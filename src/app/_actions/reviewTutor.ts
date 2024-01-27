@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { tutorReviews } from "@db/schema";
 import { db } from "@src/db";
@@ -16,11 +15,9 @@ export const insertTutorReview = async (data: { internshipId: string; observatio
   const result = UpdateSchema.safeParse(data);
   if (!result.success) return { message: result.error };
 
-  const id: string = uuidv4();
   await db
     .insert(tutorReviews)
     .values({
-      id: id,
       internshipId: data.internshipId,
       observation: data.observation,
       punctuality: data.punctuality,

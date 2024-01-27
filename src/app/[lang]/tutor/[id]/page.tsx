@@ -21,7 +21,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   if (session?.user?.email !== undefined) {
     const user = await preparedUserEmail.execute({ email: session?.user?.email });
     if (user.length === 0) redirect("/");
-    if (user[0].role !== "tutor") redirect("/");
+    if (user[0]?.role !== "tutor") redirect("/");
   }
   const dictionary = await getDictionary(params.lang);
 
@@ -44,15 +44,15 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
 
   return (
     <main className="px-20 py-16 text-blue-900">
-      <Link href={`/tutor`}>
+      <Link href={"/tutor"}>
         <Button color="blue">{dictionary.previewtutor.back}</Button>
       </Link>
-      {tutorPreview.length !== 0 ? (
+      {tutorPreview.length > 0 && (
         <section className="mt-5 flex justify-center gap-4 rounded-xl bg-green-200">
           <Image src="/assets/icons8-check.svg" alt="" width="40" height="40" />
           <h2 className="py-7 font-semibold italic text-green-700">{dictionary.previewtutor.done}</h2>
         </section>
-      ) : null}
+      )}
       <h1 className="py-7 text-4xl font-semibold italic">{dictionary.previewtutor.title}</h1>
       <TutorPreviewForm dictionary={dictionary} data={data[0]} tutorPreview={tutorPreview[0]} />
     </main>

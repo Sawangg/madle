@@ -86,7 +86,7 @@ export const evaluations = pgTable("evaluations", {
 });
 
 export const tutorReviews = pgTable("tutor_reviews", {
-  id: uuid("id").notNull().primaryKey(),
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
   internshipId: uuid("internship_id"),
   punctuality: boolean("punctuality").notNull(),
   observation: text("observation").notNull(),
