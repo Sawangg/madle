@@ -154,9 +154,15 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
           </div>
 
           <div className="mt-5 text-center">
-            <Button className="w-40" type="submit">
-              {dictionary.previewtutor.submit}
-            </Button>
+            {typeof tutorPreview !== "undefined" ? (
+              <Button className="w-40" type="submit" isDisabled>
+                {dictionary.previewtutor.submit}
+              </Button>
+            ) : (
+              <Button className="w-40" type="submit">
+                {dictionary.previewtutor.submit}
+              </Button>
+            )}
           </div>
         </form>
       </div>
