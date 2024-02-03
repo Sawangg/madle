@@ -31,19 +31,19 @@ export default function AddInternshipForm({ studentId }) {
         <section className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-2">
             <Label htmlFor="companyName">Company Name:</Label>
-            <Input name="companyName" type="text" id="companyName" className="border" />
+            <Input name="companyName" type="text" id="companyName" className="border" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="companyAddress">Company Address:</Label>
-            <Input name="companyAddress" type="text" id="companyAddress" className="border" />
+            <Input name="companyAddress" type="text" id="companyAddress" className="border" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="city">City:</Label>
-            <Input name="companyCity" type="text" id="companyCity" className="border" />
+            <Input name="companyCity" type="text" id="companyCity" className="border" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="postalCode">Postal Code:</Label>
-            <Input name="companyPostalCode" type="text" id="companyPostalCode" className="border" />
+            <Input name="companyPostalCode" type="number" min="0" id="companyPostalCode" className="border" required />
           </div>
         </section>
       </div>
@@ -53,11 +53,11 @@ export default function AddInternshipForm({ studentId }) {
         <section className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-2">
             <Label htmlFor="contactName">Contact Name:</Label>
-            <Input name="contactName" type="text" id="contactName" />
+            <Input name="contactName" type="text" id="contactName" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="contactEmail">Contact Email:</Label>
-            <Input name="contactEmail" type="email" id="contactEmail" />
+            <Input name="contactEmail" type="email" id="contactEmail" required />
           </div>
         </section>
       </div>
@@ -68,15 +68,15 @@ export default function AddInternshipForm({ studentId }) {
         <section className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-2">
             <Label htmlFor="dateStart">Start Date:</Label>
-            <Input name="dateStart" type="date" id="dateStart" />
+            <Input name="dateStart" type="date" id="dateStart" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="dateEnd">End Date:</Label>
-            <Input name="dateEnd" type="date" id="dateEnd" />
+            <Input name="dateEnd" type="date" id="dateEnd" required />
           </div>
           <div className="grid grid-cols-2">
             <Label htmlFor="title">Title:</Label>
-            <Input name="title" id="title" />
+            <Input name="title" id="title" required />
           </div>
         </section>
       </div>
@@ -86,7 +86,7 @@ export default function AddInternshipForm({ studentId }) {
         <h2 className="text-2xl font-semibold italic">Documents</h2>
         <div className="grid grid-cols-2">
           <Label htmlFor="files">Drag and drop zone for documents:</Label>
-          <Input name="files" type="files" id="files" className="border" />
+          <Input name="files" type="file" id="files" className="border" />
         </div>
       </div>
 
