@@ -9,7 +9,7 @@ const AddInternshipSchema = z.object({
   companyName: z.string(),
   companyAddress: z.string(),
   companyCity: z.string(),
-  companyPostalCode: z.string(),
+  companyPostalCode: z.number(),
   contactName: z.string(),
   contactEmail: z.string(),
   dateStart: z.string(),
@@ -22,7 +22,7 @@ export const addInternship = async (data: {
   companyName: string;
   companyAddress: string;
   companyCity: string;
-  companyPostalCode: string;
+  companyPostalCode: number;
   contactName: string;
   contactEmail: string;
   dateStart: string;

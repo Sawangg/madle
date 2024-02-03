@@ -6,19 +6,23 @@ import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
 import { Label } from "@ui/Label";
 
-export default function AddInternshipForm({ studentId }) {
+type FormProps = {
+  studentId: string;
+};
+
+export default function AddInternshipForm({ studentId }: Readonly<FormProps>) {
   const addInternshipWithStudentId = async () => {
     const data = {
       companyName: (document.getElementById("companyName") as HTMLInputElement).value,
       companyAddress: (document.getElementById("companyAddress") as HTMLInputElement).value,
       companyCity: (document.getElementById("companyCity") as HTMLInputElement).value,
-      companyPostalCode: (document.getElementById("companyPostalCode") as HTMLInputElement).value,
+      companyPostalCode: (document.getElementById("companyPostalCode") as HTMLInputElement).value as unknown as number,
       contactName: (document.getElementById("contactName") as HTMLInputElement).value,
       contactEmail: (document.getElementById("contactEmail") as HTMLInputElement).value,
       dateStart: (document.getElementById("dateStart") as HTMLInputElement).value,
       dateEnd: (document.getElementById("dateEnd") as HTMLInputElement).value,
       title: (document.getElementById("title") as HTMLInputElement).value,
-      studentId: studentId as string,
+      studentId: studentId,
     };
     await addInternship(data);
   };
