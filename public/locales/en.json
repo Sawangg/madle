@@ -67,11 +67,23 @@
   },
   "customtable": {
     "preview": "Preview",
+    "evalComplete": "Evaluation completed",
     "seemore": "See more"
   },
   "previewform": {
     "title": "Information about internship",
     "close": "Close",
     "save": "Save"
+  },
+  "previewtutor":{
+    "back": "<- Back",
+    "title": "Internship evaluation",
+    "punctuality": "Punctuality at work",
+    "punctualityComment": "Is the trainee informed of the schedules to be respected?",
+    "yes": "Yes",
+    "no": "No",
+    "observation": "Observation",
+    "submit": "Submit",
+    "done": "Information for this evaluation as been already done."
   }
 }
