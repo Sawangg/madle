@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "Madle administration platform",
 };
 
-export default async function Page({ params }: Readonly<{ params: { lang: Locale; id: number } }>) {
+export default async function Page({ params }: Readonly<{ params: { lang: Locale; id: string } }>) {
   // Tutor check
   const session = await auth();
   if (session?.user?.email !== undefined) {

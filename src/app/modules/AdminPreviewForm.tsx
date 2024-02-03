@@ -7,14 +7,14 @@ import { Button } from "@ui/Button";
 
 type FormProps = {
   dictionary: Dictionary;
-  selectedItem: Record<string, string | number>;
+  selectedItem: Record<string, string>;
   columns: Record<string, string>;
 };
 
 export default function AdminPreviewForm({ dictionary, selectedItem, columns }: Readonly<FormProps>) {
   const updateInternshipWithId = async () => {
     const data = {
-      id: selectedItem.id as number,
+      id: selectedItem.id,
       status: status as "pending" | "inprogress" | "ended",
     };
     await updateInternshipStatus(data);

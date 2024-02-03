@@ -95,7 +95,9 @@ export const evaluations = pgTable("evaluations", {
 
 export const tutorReviews = pgTable("tutor_reviews", {
   id: uuid("id").defaultRandom().notNull().primaryKey(),
-  internshipId: uuid("internship_id"),
+  internshipId: uuid("internship_id")
+    .notNull()
+    .references(() => internships.id, { onDelete: "cascade" }),
   punctuality: boolean("punctuality").notNull(),
   observation: text("observation").notNull(),
 });

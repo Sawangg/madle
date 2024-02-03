@@ -7,15 +7,15 @@ import { TextArea } from "@src/ui/TextArea";
 import { Button } from "@ui/Button";
 
 type TutorPreview = {
-  internshipId: number;
-  id: number;
+  internshipId: string;
+  id: string;
   observation: string;
   punctuality: boolean;
 };
 
 type PreviewTutorProps = {
   dictionary: Dictionary;
-  data: Record<string, string | number>;
+  data: Record<string, string>;
   tutorPreview: TutorPreview;
 };
 export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Readonly<PreviewTutorProps>) {
@@ -32,7 +32,7 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
 
   const updateTutorReview = async () => {
     const DataWeave = {
-      internshipId: data.id as number,
+      internshipId: data.id,
       observation: observation.toString(),
       punctuality: punctuality === "true",
     };
@@ -40,8 +40,8 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
   };
 
   useEffect(() => {
-    setObservation(data.observation as string);
-    setPunctuality(data.punctuality as string);
+    setObservation(data.observation);
+    setPunctuality(data.punctuality);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.observation, data.punctuality]);
 
@@ -54,7 +54,7 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
           <section className="mt-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.adm.column.student}</h2>
             <article className="flex flex-col pl-5 pt-3 font-semibold text-black">
-              <label htmlFor="StudentYear">{(data.studentName as string).toUpperCase()}</label>
+              <label htmlFor="StudentYear">{data.studentName.toUpperCase()}</label>
               <label htmlFor="studentTitle">{data.title}</label>
               <label htmlFor="studentCompany">{data.company}</label>
             </article>

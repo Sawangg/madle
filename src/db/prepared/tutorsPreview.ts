@@ -4,5 +4,5 @@ import { db } from "@src/db";
 
 export const getAllTutorsPreview = db.select().from(tutorReviews).prepare("getAllTutorsPreview");
 
-export const getTutorPreviewById = (id: number) =>
+export const getTutorPreviewById = (id: string) =>
   db.select().from(tutorReviews).where(eq(tutorReviews.internshipId, id)).prepare("getTutorPreviewById");
