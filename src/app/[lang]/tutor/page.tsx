@@ -74,7 +74,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                     <td key={columnIndex} className="border p-2">
                       {columnKey == "status"
                         ? (dictionary.adm.form as Record<string, string>)[item[columnKey]]
-                        : (item as Record<string, string>)[columnKey]}
+                        : (item as Record<string, string | number>)[columnKey]}
                     </td>
                   ))}
                   <td className="border p-2">

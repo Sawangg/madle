@@ -45,7 +45,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ color = "dark", className, .
     {...props}
   >
     <svg
-      className="size-4 stroke-[--checkbox-check] opacity-0 group-data-[selected]:opacity-100 sm:h-3.5 sm:w-3.5"
+      className="size-4 stroke-[--checkbox-check] opacity-0 group-data-[selected]:opacity-100 sm:size-3.5"
       viewBox="0 0 14 14"
       fill="none"
     >

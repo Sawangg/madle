@@ -7,15 +7,15 @@ import { TextArea } from "@src/ui/TextArea";
 import { Button } from "@ui/Button";
 
 type TutorPreview = {
-  internshipId: string;
-  id: string;
+  internshipId: number;
+  id: number;
   observation: string;
   punctuality: boolean;
 };
 
 type PreviewTutorProps = {
   dictionary: Dictionary;
-  data: Record<string, string>;
+  data: Record<string, string | number>;
   tutorPreview: TutorPreview;
 };
 export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Readonly<PreviewTutorProps>) {
@@ -32,7 +32,7 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
 
   const updateTutorReview = async () => {
     const DataWeave = {
-      internshipId: data.id,
+      internshipId: data.id as number,
       observation: observation.toString(),
       punctuality: punctuality === "true",
     };
@@ -40,8 +40,8 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
   };
 
   useEffect(() => {
-    setObservation(data.observation);
-    setPunctuality(data.punctuality);
+    setObservation(data.observation as string);
+    setPunctuality(data.punctuality as string);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.observation, data.punctuality]);
 
@@ -54,7 +54,7 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
           <section className="mt-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.adm.column.student}</h2>
             <article className="flex flex-col pl-5 pt-3 font-semibold text-black">
-              <label htmlFor="StudentYear">{data.studentName.toUpperCase()}</label>
+              <label htmlFor="StudentYear">{(data.studentName as string).toUpperCase()}</label>
               <label htmlFor="studentTitle">{data.title}</label>
               <label htmlFor="studentCompany">{data.company}</label>
             </article>
@@ -67,28 +67,16 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="oui">{dictionary.previewtutor.yes}</label>
                 {typeof tutorPreview !== "undefined" ? (
-                  tutorPreview.punctuality ? (
-                    <input
-                      type="radio"
-                      id="non"
-                      name="punctuality"
-                      value="false"
-                      width="10"
-                      onChange={handlePunctuality}
-                      checked
-                      disabled
-                    />
-                  ) : (
-                    <input
-                      type="radio"
-                      id="non"
-                      name="punctuality"
-                      value="false"
-                      width="10"
-                      onChange={handlePunctuality}
-                      disabled
-                    />
-                  )
+                  <input
+                    type="radio"
+                    id="oui"
+                    name="punctuality"
+                    value="true"
+                    width="10"
+                    onChange={handlePunctuality}
+                    checked={tutorPreview.punctuality}
+                    disabled
+                  />
                 ) : (
                   <input
                     type="radio"
@@ -97,34 +85,23 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
                     value="true"
                     width="10"
                     onChange={handlePunctuality}
+                    required
                   />
                 )}
               </div>
               <div className="grid grid-cols-2 items-center justify-items-center">
                 <label htmlFor="non">{dictionary.previewtutor.no}</label>
                 {typeof tutorPreview !== "undefined" ? (
-                  !tutorPreview.punctuality ? (
-                    <input
-                      type="radio"
-                      id="non"
-                      name="punctuality"
-                      value="false"
-                      width="10"
-                      onChange={handlePunctuality}
-                      checked
-                      disabled
-                    />
-                  ) : (
-                    <input
-                      type="radio"
-                      id="non"
-                      name="punctuality"
-                      value="false"
-                      width="10"
-                      onChange={handlePunctuality}
-                      disabled
-                    />
-                  )
+                  <input
+                    type="radio"
+                    id="non"
+                    name="punctuality"
+                    value="false"
+                    width="10"
+                    onChange={handlePunctuality}
+                    checked={!tutorPreview.punctuality}
+                    disabled
+                  />
                 ) : (
                   <input
                     type="radio"
@@ -133,6 +110,7 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
                     value="false"
                     width="10"
                     onChange={handlePunctuality}
+                    required
                   />
                 )}
               </div>
@@ -142,14 +120,9 @@ export default function TutorPreviewForm({ dictionary, data, tutorPreview }: Rea
           <div className="mt-5 rounded border p-5">
             <h2 className="text-2xl font-semibold italic">{dictionary.previewtutor.observation}</h2>
             {typeof tutorPreview !== "undefined" ? (
-              <TextArea
-                name="observation"
-                onChange={handleObservation}
-                value={tutorPreview.observation}
-                disabled
-              ></TextArea>
+              <TextArea name="observation" onChange={handleObservation} value={tutorPreview.observation} disabled />
             ) : (
-              <TextArea name="observation" onChange={handleObservation}></TextArea>
+              <TextArea name="observation" onChange={handleObservation} required />
             )}
           </div>
 

@@ -46,11 +46,11 @@
     "title": "Étudiant",
     "internshiptitle": "Mes stages",
     "column": {
-      "date": "Date",
+      "datestart": "Date de début",
+      "dateend": "Date de fin",
       "company": "Entreprise",
-      "contact": "Contact",
-      "internship": "Titre",
-      "document": "Document"
+      "tutor": "Tuteur",
+      "internship": "Titre"
     }
   },
   "tutor": {

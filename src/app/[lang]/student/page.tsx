@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getTutorsList } from "@actions/getTutorsList";
+import { getUserId } from "@actions/getUserId";
 import { isStudent } from "@actions/isStudent";
+import { getInternshipStudentTableByStudentId } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import AddInternshipForm from "@src/app/modules/AddInternshipFrom";
+import AddInternshipForm from "@src/app/modules/AddInternshipForm";
 import { CustomTable } from "@src/app/modules/CustomTable";
 import { SectionInfo } from "@src/app/modules/sectionInfo";
 
@@ -18,33 +21,28 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   const student = await isStudent(session!.user!.email!);
   if (!student) return redirect("/");
 
+  const studentId = await getUserId(session!.user!.email!);
+
   const dictionary = await getDictionary(params.lang);
+
+  const tutorsList = await getTutorsList();
 
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
-  const column = {
-    date: dictionary.student.column.date,
+  const column: Record<string, string> = {
+    dateStart: dictionary.student.column.datestart,
+    dateEnd: dictionary.student.column.dateend,
     company: dictionary.student.column.company,
-    contact: dictionary.student.column.contact,
-    internship: dictionary.student.column.internship,
-    document: dictionary.student.column.document,
+    tutorEmail: dictionary.student.column.tutor,
+    title: dictionary.student.column.internship,
+    status: dictionary.adm.column.status,
   };
-  const data = [
-    {
-      date: "2022-01-01",
-      company: "ABC Inc",
-      contact: "John Doe",
-      internship: "Software Developer",
-      document: "Resume",
-    },
-    {
-      date: "2022-02-01",
-      company: "XYZ Ltd",
-      contact: "Jane Smith",
-      internship: "Marketing Intern",
-      document: "Cover Letter",
-    },
-  ];
+
+  const data = (await getInternshipStudentTableByStudentId(studentId).execute()).map((internship) => ({
+    ...internship,
+    dateStart: internship.dateStart.toISOString().split("T")[0],
+    dateEnd: internship.dateEnd.toISOString().split("T")[0],
+  }));
 
   return (
     <main className="px-20 py-16 text-blue-900">
@@ -55,8 +53,8 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
         <CustomTable columns={column} data={data} dictionary={dictionary} />
       </section>
       <section>
-        <h2 className="py-4 text-2xl underline">Add internship</h2>
-        <AddInternshipForm />
+        <h2 className={"py-4 text-2xl underline"}>Add internship</h2>
+        <AddInternshipForm studentId={studentId} tutorsList={tutorsList} />
       </section>
     </main>
   );

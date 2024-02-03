@@ -1,4 +1,4 @@
-import { boolean, integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, primaryKey, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 // Auth tables
 export const userRoles = pgEnum("role", ["student", "tutor", "admin"]);
@@ -48,46 +48,56 @@ export const verificationTokens = pgTable(
   }),
 );
 
+export const companies = pgTable("companies", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  address: text("address").notNull(),
+  city: text("city").notNull(),
+  postalCode: integer("postal_code"),
+});
+
 export const internships = pgTable("internships", {
-  id: uuid("id").notNull().primaryKey(),
+  id: serial("id").primaryKey(),
   title: text("title").notNull(),
   dateStart: timestamp("date_start", { mode: "date" }).notNull(),
   dateEnd: timestamp("date_end", { mode: "date" }).notNull(),
-  company: text("company").notNull(),
   status: text("status").$type<"inprogress" | "pending" | "ended">().notNull(),
+  companyId: serial("company_id")
+    .notNull()
+    .references(() => companies.id, { onDelete: "cascade" }),
   studentId: uuid("student_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  tutorId: uuid("tutor_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  tutorId: uuid("tutor_id").references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const documentTypes = pgEnum("type", ["report", "cdc", "other"]);
 
 export const documents = pgTable("documents", {
-  id: uuid("id").notNull().primaryKey(),
+  id: serial("id").primaryKey(),
   name: text("name").notNull(),
   content: text("content").notNull(),
   type: documentTypes("type"),
-  internshipId: uuid("internship_id")
+  internshipId: serial("internship_id")
     .notNull()
     .references(() => internships.id, { onDelete: "cascade" }),
 });
 
 export const evaluations = pgTable("evaluations", {
-  id: uuid("id").notNull().primaryKey(),
+  id: serial("id").primaryKey(),
   submission_date: timestamp("date", { mode: "date" }).notNull(),
   factor: text("factor").notNull(),
   content: text("content").notNull(),
-  internshipId: uuid("internship_id")
+  internshipId: serial("internship_id")
     .notNull()
     .references(() => internships.id, { onDelete: "cascade" }),
 });
 
 export const tutorReviews = pgTable("tutor_reviews", {
-  id: uuid("id").defaultRandom().notNull().primaryKey(),
-  internshipId: uuid("internship_id"),
+  id: serial("id").primaryKey(),
+  internshipId: serial("internship_id")
+    .notNull()
+    .references(() => internships.id, { onDelete: "cascade" }),
   punctuality: boolean("punctuality").notNull(),
   observation: text("observation").notNull(),
 });

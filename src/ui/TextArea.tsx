@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { TextArea as RATextArea, type TextAreaProps } from "react-aria-components";
 
 export const TextArea: React.FC<TextAreaProps> = ({ ...props }) => {
@@ -7,7 +8,7 @@ export const TextArea: React.FC<TextAreaProps> = ({ ...props }) => {
       data-slot="control"
     >
       <RATextArea
-        className="dark:border-white/10 dark:bg-white/5 dark:text-white disabled:dark:border-white/15 disabled:dark:bg-white/[2.5%] dark:data-[hovered]:border-white/20 data-[invalid]:dark:border-red-600 data-[invalid]:data-[hovered]:dark:border-red-600 dark:data-[hovered]:disabled:border-white/15 relative block h-full w-full appearance-none rounded-lg border border-zinc-950/10 bg-transparent px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 focus:outline-none disabled:border-zinc-950/20 data-[hovered]:border-zinc-950/20 data-[invalid]:border-red-500 data-[invalid]:data-[hovered]:border-red-500 sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6"
+        className="dark:border-white/10 dark:bg-white/5 dark:text-white disabled:dark:border-white/15 disabled:dark:bg-white/[2.5%] dark:data-[hovered]:border-white/20 data-[invalid]:dark:border-red-600 data-[invalid]:data-[hovered]:dark:border-red-600 dark:data-[hovered]:disabled:border-white/15 relative block size-full appearance-none rounded-lg border border-zinc-950/10 bg-transparent px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 focus:outline-none disabled:border-zinc-950/20 data-[hovered]:border-zinc-950/20 data-[invalid]:border-red-500 data-[invalid]:data-[hovered]:border-red-500 sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6"
         {...props}
       />
     </span>

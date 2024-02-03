@@ -6,12 +6,12 @@ import { tutorReviews } from "@db/schema";
 import { db } from "@src/db";
 
 const UpdateSchema = z.object({
-  internshipId: z.string().uuid(),
+  internshipId: z.number(),
   observation: z.string(),
   punctuality: z.boolean(),
 });
 
-export const insertTutorReview = async (data: { internshipId: string; observation: string; punctuality: boolean }) => {
+export const insertTutorReview = async (data: { internshipId: number; observation: string; punctuality: boolean }) => {
   const result = UpdateSchema.safeParse(data);
   if (!result.success) return { message: result.error };
 
@@ -24,5 +24,6 @@ export const insertTutorReview = async (data: { internshipId: string; observatio
     })
     .prepare("insertTutorReview")
     .execute();
+
   return redirect("/tutor");
 };
