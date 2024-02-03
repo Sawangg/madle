@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getTutorsList } from "@actions/getTutorsList";
 import { getUserId } from "@actions/getUserId";
 import { isStudent } from "@actions/isStudent";
 import { getInternshipStudentTableByStudentId } from "@db/prepared/internships";
@@ -23,23 +24,23 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
 
   const dictionary = await getDictionary(params.lang);
 
+  const tutorsList = await getTutorsList();
+
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
   const column: Record<string, string> = {
     dateStart: dictionary.student.column.datestart,
     dateEnd: dictionary.student.column.dateend,
     company: dictionary.student.column.company,
-    contact: dictionary.student.column.contact,
-    internship: dictionary.student.column.internship,
+    tutorEmail: dictionary.student.column.tutor,
+    title: dictionary.student.column.internship,
+    status: dictionary.adm.column.status,
   };
 
   const data = (await getInternshipStudentTableByStudentId(studentId).execute()).map((internship) => ({
     ...internship,
     dateStart: internship.dateStart.toISOString().split("T")[0],
     dateEnd: internship.dateEnd.toISOString().split("T")[0],
-    company: internship.company,
-    contact: internship.contactEmail,
-    internship: internship.title,
   }));
 
   return (
@@ -51,7 +52,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
       </section>
       <section>
         <h2 className={"py-4 text-2xl underline"}>Add internship</h2>
-        <AddInternshipForm studentId={studentId} />
+        <AddInternshipForm studentId={studentId} tutorsList={tutorsList} />
       </section>
     </main>
   );

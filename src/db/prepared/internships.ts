@@ -18,7 +18,7 @@ export const getAllInternshipsWithStudentName = db
   .innerJoin(companies, eq(internships.companyId, companies.id))
   .prepare("getAllInternships");
 
-export const getInternshipByIdWithStudentName = (id: string) =>
+export const getInternshipByIdWithStudentName = (id: number) =>
   db
     .select({
       id: internships.id,
@@ -80,7 +80,8 @@ export const getInternshipStudentTableByStudentId = (id: string) =>
       dateStart: internships.dateStart,
       dateEnd: internships.dateEnd,
       company: companies.name,
-      contactEmail: users.email,
+      tutorEmail: users.email,
+      status: internships.status,
     })
     .from(internships)
     .innerJoin(users, eq(internships.tutorId, users.id))

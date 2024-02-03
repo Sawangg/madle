@@ -7,11 +7,11 @@ import { internships } from "@db/schema";
 import { db } from "@src/db";
 
 const UpdateSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   status: z.enum(["pending", "inprogress", "ended"]),
 });
 
-export const updateInternshipStatus = async (data: { id: string; status: string }) => {
+export const updateInternshipStatus = async (data: { id: number; status: string }) => {
   const result = UpdateSchema.safeParse(data);
   if (!result.success) return { message: result.error };
 

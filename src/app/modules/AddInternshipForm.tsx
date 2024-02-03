@@ -5,26 +5,17 @@ import { addInternship } from "@actions/addInternship";
 import { Button } from "@ui/Button";
 import { Input } from "@ui/Input";
 import { Label } from "@ui/Label";
+import { Option, Select } from "@ui/Select";
 
 type FormProps = {
   studentId: string;
+  tutorsList: { userId: string; username: string | null; email: string }[];
 };
 
-export default function AddInternshipForm({ studentId }: Readonly<FormProps>) {
-  const addInternshipWithStudentId = async () => {
-    const data = {
-      companyName: (document.getElementById("companyName") as HTMLInputElement).value,
-      companyAddress: (document.getElementById("companyAddress") as HTMLInputElement).value,
-      companyCity: (document.getElementById("companyCity") as HTMLInputElement).value,
-      companyPostalCode: (document.getElementById("companyPostalCode") as HTMLInputElement).value as unknown as number,
-      contactName: (document.getElementById("contactName") as HTMLInputElement).value,
-      contactEmail: (document.getElementById("contactEmail") as HTMLInputElement).value,
-      dateStart: (document.getElementById("dateStart") as HTMLInputElement).value,
-      dateEnd: (document.getElementById("dateEnd") as HTMLInputElement).value,
-      title: (document.getElementById("title") as HTMLInputElement).value,
-      studentId: studentId,
-    };
-    await addInternship(data);
+export default function AddInternshipForm({ studentId, tutorsList }: Readonly<FormProps>) {
+  const addInternshipWithStudentId = async (formData: FormData) => {
+    formData.append("studentId", studentId);
+    await addInternship(formData);
   };
 
   return (
@@ -51,17 +42,19 @@ export default function AddInternshipForm({ studentId }: Readonly<FormProps>) {
           </div>
         </section>
       </div>
-      {/* Contact Section */}
+      {/* Tutor Section */}
       <div className="mb-5 rounded border p-5">
-        <h2 className="text-2xl font-semibold italic">Contact</h2>
+        <h2 className="text-2xl font-semibold italic">Tutor</h2>
         <section className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-2">
-            <Label htmlFor="contactName">Contact Name:</Label>
-            <Input name="contactName" type="text" id="contactName" required />
-          </div>
-          <div className="grid grid-cols-2">
-            <Label htmlFor="contactEmail">Contact Email:</Label>
-            <Input name="contactEmail" type="email" id="contactEmail" required />
+            <Label htmlFor="contactEmail">Select Tutor:</Label>
+            <Select name="tutorId" id="tutorId" label="tutorId" isRequired>
+              {tutorsList.map((tutor) => (
+                <Option key={tutor.userId} value={tutor.userId}>
+                  {tutor.username} ({tutor.email})
+                </Option>
+              ))}
+            </Select>
           </div>
         </section>
       </div>
