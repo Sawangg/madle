@@ -5,8 +5,8 @@ import { isAdmin } from "@actions/isAdmin";
 import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import { Button } from "@ui/Button";
 import { SectionInfo } from "@src/app/modules/sectionInfo";
+import { Button } from "@ui/Button";
 
 export const metadata: Metadata = {
   title: "Madle - Admin part",
