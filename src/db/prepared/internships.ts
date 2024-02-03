@@ -72,3 +72,18 @@ export const getInternshipTutorTableByTutorId = (id: string) =>
     .innerJoin(companies, eq(internships.companyId, companies.id))
     .where(eq(internships.tutorId, id))
     .prepare("getInternshipTutorTableByTutorId");
+
+export const getInternshipStudentTableByStudentId = (id: string) =>
+  db
+    .select({
+      title: internships.title,
+      dateStart: internships.dateStart,
+      dateEnd: internships.dateEnd,
+      company: companies.name,
+      contactEmail: users.email,
+    })
+    .from(internships)
+    .innerJoin(users, eq(internships.tutorId, users.id))
+    .innerJoin(companies, eq(internships.companyId, companies.id))
+    .where(eq(internships.studentId, id))
+    .prepare("getInternshipStudentTableByStudentId");

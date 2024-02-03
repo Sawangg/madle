@@ -46,11 +46,11 @@
     "title": "Student",
     "internshiptitle": "My internships",
     "column": {
-      "date": "Date",
+      "datestart": "Start date",
+      "dateend": "End date",
       "company": "Company",
       "contact": "Contact",
-      "internship": "Internship",
-      "document": "Document"
+      "internship": "Internship"
     }
   },
   "tutor": {
