@@ -85,5 +85,9 @@
     "observation": "Observation",
     "submit": "Submit",
     "done": "Information for this evaluation as been already done."
+  },
+  "infoBox": {
+    "info1": "You can view the details of your internships by clicking on the 'See more' button.",
+    "info2": "Don't forget to complete your forms before the closing dates."
   }
 }

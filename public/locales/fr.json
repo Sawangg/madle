@@ -85,5 +85,9 @@
     "observation": "Observations",
     "submit": "Soumettre",
     "done": "Les informations ont déjà été completées."
+  },
+  "infoBox": {
+    "info1": "Vous pouvez voir les détails de vos stages en cliquant sur le bouton 'Voir plus'.",
+    "info2": "N'oubliez pas de completer vos formulaires avant les dates de fin."
   }
 }

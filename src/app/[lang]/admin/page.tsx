@@ -6,6 +6,7 @@ import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
 import { Button } from "@ui/Button";
+import { SectionInfo } from "@src/app/modules/sectionInfo";
 
 export const metadata: Metadata = {
   title: "Madle - Admin part",
@@ -48,6 +49,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   return (
     <main className="px-20 py-16 text-blue-900">
       <h1 className="py-7 text-4xl font-semibold italic">{dictionary.adm.title}</h1>
+      <SectionInfo dictionary={dictionary} />
       <section>
         <h2 className="py-4 text-2xl underline">{dictionary.adm.internshiptitle}</h2>
         <table className="w-full border-collapse border">
