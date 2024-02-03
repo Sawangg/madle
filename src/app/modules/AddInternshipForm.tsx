@@ -16,7 +16,7 @@ export default function AddInternshipForm({ studentId }: Readonly<FormProps>) {
       companyName: (document.getElementById("companyName") as HTMLInputElement).value,
       companyAddress: (document.getElementById("companyAddress") as HTMLInputElement).value,
       companyCity: (document.getElementById("companyCity") as HTMLInputElement).value,
-      companyPostalCode: (document.getElementById("companyPostalCode") as HTMLInputElement).value as unknown as number,
+      companyPostalCode: (document.getElementById("companyPostalCode") as HTMLInputElement).value,
       contactName: (document.getElementById("contactName") as HTMLInputElement).value,
       contactEmail: (document.getElementById("contactEmail") as HTMLInputElement).value,
       dateStart: (document.getElementById("dateStart") as HTMLInputElement).value,

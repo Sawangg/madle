@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getUserId } from "@actions/getUserId";
 import { companies, internships } from "@db/schema";
 import { db } from "@src/db";
 
@@ -39,20 +40,21 @@ export const addInternship = async (data: {
       name: result.data.companyName,
       address: result.data.companyAddress,
       city: result.data.companyCity,
-      postalCode: result.data.companyPostalCode,
+      postalCode: Number(result.data.companyPostalCode),
     })
     .returning({ insertedId: companies.id });
   const insertedCompanyId = insertCompanyResult[0].insertedId;
 
+  const tutorId = await getUserId(result.data.contactEmail);
+
   await db.insert(internships).values({
     companyId: insertedCompanyId,
-    contactName: result.data.contactName,
-    contactEmail: result.data.contactEmail,
     dateStart: new Date(result.data.dateStart),
     dateEnd: new Date(result.data.dateEnd),
     status: "pending",
     title: result.data.title,
     studentId: result.data.studentId,
+    tutorId: tutorId,
   });
 
   return redirect("/student");
