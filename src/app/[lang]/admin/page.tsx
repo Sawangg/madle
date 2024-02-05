@@ -5,6 +5,7 @@ import { isAdmin } from "@actions/isAdmin";
 import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
+import { DeleteInternship } from "@src/app/modules/DeleteInternship";
 import { SectionInfo } from "@src/app/modules/sectionInfo";
 import { Button } from "@ui/Button";
 
@@ -22,7 +23,6 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
   const dictionary = await getDictionary(params.lang);
 
   /* CustomTable data + column name based on language */
-
   // Column key and its name in the table (based on language)
   // (Be sure that the key is exactly the same as the one in the data or the value won't be displayed)
   const column: Record<string, string> = {
@@ -61,6 +61,7 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                 </th>
               ))}
               <th className="border p-2">{dictionary.customtable.preview}</th>
+              <th className="border p-2">{dictionary.customtable.deletedText}</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +81,9 @@ export default async function Page({ params }: Readonly<{ params: { lang: Locale
                         {dictionary.customtable.preview}
                       </Button>
                     </Link>
+                  </td>
+                  <td className="border p-2">
+                    <DeleteInternship dictionary={dictionary} id={item.id} />
                   </td>
                 </tr>
               );
