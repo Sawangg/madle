@@ -68,7 +68,8 @@
   "customtable": {
     "preview": "Preview",
     "evalComplete": "Evaluation completed",
-    "seemore": "See more"
+    "seemore": "See more",
+    "deletedText": "Delete"
   },
   "previewform": {
     "title": "Information about internship",

@@ -68,7 +68,8 @@
   "customtable": {
     "preview": "Prévisualiser",
     "evalComplete": "Evaluation completée",
-    "seemore": "Voir plus"
+    "seemore": "Voir plus",
+    "deletedText": "Supprimer"
   },
   "previewform": {
     "title": "Informations du stage",
