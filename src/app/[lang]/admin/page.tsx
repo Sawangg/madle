@@ -5,7 +5,7 @@ import { isAdmin } from "@actions/isAdmin";
 import { getAllInternshipsWithStudentName } from "@db/prepared/internships";
 import { auth } from "@lib/auth";
 import { getDictionary, type Locale } from "@lib/getDictionnary";
-import { DeleteInternship } from "@src/app/[lang]/admin/DeleteInternship";
+import { DeleteInternship } from "@src/app/modules/DeleteInternship";
 import { SectionInfo } from "@src/app/modules/sectionInfo";
 import { Button } from "@ui/Button";
 
