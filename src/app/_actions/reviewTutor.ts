@@ -29,7 +29,7 @@ export const insertTutorReview = async (data: { internshipId: number; observatio
   return redirect("/tutor");
 };
 
-export const getTutorReviews = (id: number) =>
+export const getTutorReviews = async (id: number) =>
   db
     .select({
       id: tutorReviews.id,

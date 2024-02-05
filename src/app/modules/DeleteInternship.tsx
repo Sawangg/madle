@@ -12,7 +12,6 @@ export function DeleteInternship({ dictionary, id }: Readonly<DeleteInternshipPr
   const deleteInternship = async () => {
     try {
       await deleteInternshipById(id);
-      console.log(`Internship with id ${id} deleted successfully.`);
     } catch (error) {
       console.error(`Failed to delete internship with id ${id}.`, error);
     }
